@@ -6,8 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AuthStateInterface } from 'src/app/shared/models/state.model';
-import { signInRequest } from 'src/app/shared/store/auth/auth.actions';
+import { AuthStateInterface } from 'src/app/auth/model/state.model';
+import { signInRequest } from '../store/auth/auth.actions';
 
 @Component({
   selector: 'app-sign-in-form',

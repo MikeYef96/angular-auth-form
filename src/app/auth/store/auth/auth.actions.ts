@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UserData } from '../../models/user-data.model';
+import { UserData } from '../../../shared/models/user-data.model';
 
 export const signInRequest = createAction(
   '[Auth] Sign In Request',

@@ -1,14 +1,18 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UsersInterface } from 'src/app/dashboard/model/get-users.model';
 
 import { UserData } from '../../shared/models/user-data.model';
 import { ApiService } from '../../shared/services/api.service';
+import { IUsersState } from '../store/dashboard/dashboard.reducer';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DashboardService extends ApiService {
-  private roleStoreKey = 'role';
+  private usersStoreKey = 'users';
+
+  private users: UsersInterface[] = [];
 
   constructor(protected injector: Injector) {
     super(injector);
@@ -18,11 +22,11 @@ export class DashboardService extends ApiService {
     return super.get<UserData>('users');
   }
 
-  setRole(role: string): void {
-    localStorage.setItem(this.roleStoreKey, role);
+  getUsers(): Observable<IUsersState> {
+    return super.get<IUsersState>('users');
   }
 
-  getRole(): string | null {
-    return localStorage.getItem(this.roleStoreKey);
+  setUsers(users: object): void {
+    localStorage.setItem(this.usersStoreKey, JSON.stringify(users));
   }
 }

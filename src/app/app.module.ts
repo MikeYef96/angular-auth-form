@@ -9,13 +9,14 @@ import { AuthModule } from './auth/auth.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { authReducer } from './shared/store/auth/auth.reducer';
-import { AuthEffects } from './shared/store/auth/auth.effects';
+import { authReducer } from './auth/store/auth/auth.reducer';
+import { AuthEffects } from './auth/store/auth/auth.effects';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { dashboardReducer } from './dashboard/store/dashboard/dashboard.reducer';
 import { UsersModule } from './dashboard/dashboard.module';
-import { DashboardEffects } from './shared/store/dashboard/dashboard.effects';
+import { DashboardEffects } from './dashboard/store/dashboard/dashboard.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +29,7 @@ import { DashboardEffects } from './shared/store/dashboard/dashboard.effects';
     HttpClientModule,
     SharedModule,
     CoreModule,
-    StoreModule.forRoot({ auth: authReducer }),
+    StoreModule.forRoot({ user: dashboardReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),

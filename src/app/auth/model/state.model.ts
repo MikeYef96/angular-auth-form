@@ -1,4 +1,4 @@
-import { UserData } from './user-data.model';
+import { UserData } from '../../shared/models/user-data.model';
 
 export interface AuthStateInterface {
   auth: {

@@ -14,10 +14,10 @@ export class DashboardEffects {
     this.actions$.pipe(
       ofType(dashboardActions.getUsersRequest),
       switchMap(() => {
-        return this.dashboardService.getUserData().pipe(
+        return this.dashboardService.getUsers().pipe(
           map((user) => {
             this.ngZone.run(() => {
-              this.dashboardService.setRole(user.role);
+              this.dashboardService.setUsers(user);
               this.router.navigate(['/users']);
             });
 
