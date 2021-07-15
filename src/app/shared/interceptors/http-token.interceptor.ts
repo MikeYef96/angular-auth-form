@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -21,19 +21,9 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     request = request.clone({
-      setHeaders: {
-        // Authorization: `Bearer ${this.authService.getToken()}`,
-        'Access-Control-Allow-Headers': [
-          'Origin',
-          'Methods',
-          'Content-Type',
-          'X-Token',
-        ],
-        'Access-Control-Allow-Methods': '*',
-        'Access-Control-Allow-Origin': 'http://localhost:4200',
-        Connection: 'keep-alive',
-      },
+      setHeaders: {},
     });
+
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err instanceof HttpErrorResponse && err.status === 401) {

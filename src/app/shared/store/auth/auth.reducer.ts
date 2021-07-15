@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import * as authActions from './auth.actions';
-import { AuthStateInterface } from '../models/state.model';
+import { AuthStateInterface } from '../../models/state.model';
 
 export const initState: AuthStateInterface = {
   auth: {
@@ -25,13 +25,28 @@ const reducer = createReducer<AuthStateInterface>(
     authorization: true,
   })),
 
-  on(authActions.signInSuccess, (state, { user }) => ({
+  on(authActions.signInSuccess, (state, user) => ({
     ...state,
     userData: user,
     authorization: false,
   })),
 
   on(authActions.signInError, (state) => ({
+    ...state,
+    authorization: false,
+  })),
+
+  on(authActions.signUpRequest, (state) => ({
+    ...state,
+    authorization: true,
+  })),
+
+  on(authActions.signUpSuccess, (state) => ({
+    ...state,
+    authorization: false,
+  })),
+
+  on(authActions.signUpError, (state) => ({
     ...state,
     authorization: false,
   }))

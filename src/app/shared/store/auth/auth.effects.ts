@@ -7,7 +7,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as authActions from './auth.actions';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Injectable()
 export class AuthEffects {
@@ -18,30 +18,17 @@ export class AuthEffects {
         return this.authService.login({ email, password }).pipe(
           map((userSession) => {
             this.ngZone.run(() => {
-              this.authService.setToken(userSession.sessionToken);
-              this.router.navigate(['/users']); //home page with users
+              this.authService.setToken(userSession.token);
+              this.authService.setRole(userSession.role);
+
+              this.router.navigate(['/users']);
             });
 
-            return authActions.signInSuccess(userSession._embedded);
+            return authActions.signInSuccess(userSession);
           }),
           catchError((error) => {
             this.toastr.error('Oops, login failed');
             return of(authActions.signInError());
-          })
-        );
-      })
-    )
-  );
-
-  signUp$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(authActions.signUpRequest),
-      switchMap(({ name, email, password }) => {
-        return this.authService.register({ name, email, password }).pipe(
-          map(() => authActions.signUpSuccess()),
-          catchError((error) => {
-            this.toastr.error('Oops, register failed');
-            return of(authActions.signUpError());
           })
         );
       })

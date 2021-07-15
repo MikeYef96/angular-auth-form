@@ -1,5 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
-import { EMPTY, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { UserData } from 'src/app/shared/models/user-data.model';
 
 import { DsUserSessionInterface } from '../../shared/models/ds-user-session.model';
 import { ApiService } from '../../shared/services/api.service';
@@ -9,21 +10,14 @@ import { ApiService } from '../../shared/services/api.service';
 })
 export class AuthService extends ApiService {
   private tokenStoreKey = 'token';
+  private roleStoreKey = 'role';
 
   constructor(protected injector: Injector) {
     super(injector);
   }
 
-  login({ email, password }: any): Observable<DsUserSessionInterface> {
-    return super.post<DsUserSessionInterface>('login', {
-      email,
-      password,
-    });
-  }
-
-  register({ name, email, password }: any): Observable<any> {
-    return super.post<DsUserSessionInterface>('register', {
-      name,
+  login({ email, password }: any): Observable<UserData> {
+    return super.post<UserData>('login', {
       email,
       password,
     });
@@ -39,5 +33,13 @@ export class AuthService extends ApiService {
 
   hasToken(): boolean {
     return !!this.getToken();
+  }
+
+  setRole(role: string): void {
+    localStorage.setItem(this.roleStoreKey, role);
+  }
+
+  getRole(): string | null {
+    return localStorage.getItem(this.roleStoreKey);
   }
 }

@@ -1,10 +1,6 @@
 export interface UserData {
-  id: string;
-  profile: {
-    login: string;
-    firstName: string;
-    lastName: string;
-    locale: string;
-    timeZone: string;
-  };
+  firstName: string;
+  lastName: string;
+  role: string;
+  token: string;
 }

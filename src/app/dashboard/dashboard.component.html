@@ -1,0 +1,15 @@
+<div class="users-wrapper" *ngIf="user$ | async as users">
+  <pre>{{ users | json }}</pre>
+</div>
+
+<div class="header">
+  <h2 class="admin-title">Iteam</h2>
+  <div class="header-container" *ngIf="authService.getRole() === 'Admin'">
+    <a routerLink="/users#" mat-button class="auth-header__button"
+      >Navigation</a
+    >
+  </div>
+</div>
+
+<app-user *ngIf="authService.getRole() === 'User'"></app-user>
+<app-admin *ngIf="authService.getRole() === 'Admin'"></app-admin>

@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AuthStateInterface } from 'src/app/shared/models/state.model';
-import { signInRequest } from 'src/app/shared/store/auth.actions';
+import { signInRequest } from 'src/app/shared/store/auth/auth.actions';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -17,7 +17,7 @@ import { signInRequest } from 'src/app/shared/store/auth.actions';
 })
 export class SignInFormComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    email: new FormControl('user@deepersignals.com', [
+    email: new FormControl('admin@deepersignals.com', [
       Validators.email,
       Validators.required,
     ]),
@@ -44,7 +44,6 @@ export class SignInFormComponent implements OnInit {
       return;
     }
 
-    console.log(this.form.value);
     this.store.dispatch(signInRequest(this.form.getRawValue()));
   }
 }

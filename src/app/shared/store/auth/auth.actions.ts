@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UserData } from '../models/user-data.model';
+import { UserData } from '../../models/user-data.model';
 
 export const signInRequest = createAction(
   '[Auth] Sign In Request',
@@ -7,7 +7,7 @@ export const signInRequest = createAction(
 );
 export const signInSuccess = createAction(
   '[Auth] Sign In Success',
-  props<{ user: UserData }>()
+  props<UserData>()
 );
 export const signInError = createAction('[Auth] Sign In Error');
 
