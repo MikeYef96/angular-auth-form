@@ -1,4 +1,4 @@
-export interface UsersInterface {
+export interface UserInterface {
   id: number;
   name: string;
   users_resolved: number;
@@ -6,8 +6,3 @@ export interface UsersInterface {
   image_url: string;
 }
 
-export interface GetUsersInterface {
-  users: {
-    user: UsersInterface;
-  };
-}

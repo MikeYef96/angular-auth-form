@@ -5,7 +5,7 @@ import { UserData } from '../shared/models/user-data.model';
 import { AuthService } from '../auth/services/auth.service';
 import { getUsersRequest } from './store/dashboard/dashboard.actions';
 import { selectRole } from '../auth/store/auth/auth.selectors';
-import { IUsersState } from './store/dashboard/dashboard.reducer';
+import { IDashboardState } from './store/dashboard/dashboard.reducer';
 
 @Component({
   selector: 'app-users',
@@ -20,16 +20,13 @@ export class UsersComponent implements OnInit {
   constructor(
     private store: Store<UserData>,
     public authService: AuthService,
-    private storeDashboard: Store<IUsersState>
+    private storeDashboard: Store<IDashboardState>
   ) {
     this.storeDashboard.dispatch(getUsersRequest());
   }
 
   ngOnInit() {
-    console.log(this.getUsers());
+    this.storeDashboard.select(selectAllUsers).subscribe(v => console.log(v))
   }
 
-  getUsers(): void {
-    this.allUsers$.subscribe((v) => v.map((x) => x.name));
-  }
 }

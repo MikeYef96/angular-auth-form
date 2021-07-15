@@ -10,18 +10,22 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class DashboardEffects {
+
+  constructor(
+    private actions$: Actions,
+    private dashboardService: DashboardService,
+    private toastr: ToastrService,
+    private ngZone: NgZone,
+    private router: Router
+  ) {}
+
   getUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(dashboardActions.getUsersRequest),
       switchMap(() => {
         return this.dashboardService.getUsers().pipe(
-          map((user) => {
-            this.ngZone.run(() => {
-              this.dashboardService.setUsers(user);
-              this.router.navigate(['/users']);
-            });
-
-            return dashboardActions.getUsersSuccess(user);
+          map((users) => {
+            return dashboardActions.getUsersSuccess({ users });
           }),
           catchError((error) => {
             this.toastr.error('Oops, login failed');
@@ -32,11 +36,4 @@ export class DashboardEffects {
     )
   );
 
-  constructor(
-    private actions$: Actions,
-    private dashboardService: DashboardService,
-    private toastr: ToastrService,
-    private ngZone: NgZone,
-    private router: Router
-  ) {}
 }

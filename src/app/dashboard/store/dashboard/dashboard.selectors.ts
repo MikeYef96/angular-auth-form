@@ -1,11 +1,8 @@
-import { createSelector, State } from '@ngrx/store';
-// import { UserData } from '../../models/user-data.model';
-import { UsersInterface } from '../../model/get-users.model';
-import { IUsersState } from './dashboard.reducer';
+import { createSelector } from '@ngrx/store';
 
-export const selectDashboardState = (state: IUsersState) => state;
+export const selectDashboardState = (state: any) => state;
 
 export const selectAllUsers = createSelector(
   selectDashboardState,
-  (state) => state.users
+  state => state.users.usersList
 );

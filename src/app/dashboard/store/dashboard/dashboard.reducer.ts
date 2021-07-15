@@ -1,32 +1,28 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import * as dashboardActions from './dashboard.actions';
-import { UsersInterface } from '../../model/get-users.model';
+import { UserInterface } from '../../model/get-users.model';
 
-export interface IUsersState {
-  users: UsersInterface[];
+export interface IDashboardState {
+  usersList: UserInterface[];
 }
 
-export const initialState: IUsersState = {
-  users: [],
+export const initialState: IDashboardState = {
+  usersList: []
 };
 
-export function dashboardReducer(
-  state: IUsersState | undefined,
-  action: Action
-): IUsersState {
+export function dashboardReducer(state: IDashboardState | undefined, action: Action): IDashboardState {
   return reducer(state, action);
 }
 
-const reducer = createReducer<IUsersState>(
+const reducer = createReducer<IDashboardState>(
   initialState,
 
-  on(dashboardActions.getUsersRequest, (state) => ({
-    ...state,
-  })),
+  // Get Users List
 
   on(dashboardActions.getUsersSuccess, (state, { users }) => ({
-    ...state,
-    users,
-  }))
-);
+      ...state,
+      usersList: users
+    })
+  )
+)

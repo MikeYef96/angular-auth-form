@@ -8,8 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { UserComponent } from './user/user.component';
-import { AdminComponent } from './admin/admin.component';
+import { UserComponent } from './components/user/user.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [UsersComponent, UserComponent, AdminComponent],

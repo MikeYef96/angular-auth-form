@@ -11,7 +11,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [SignInFormComponent, AuthComponent],
@@ -24,10 +23,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     MatButtonModule,
     MatInputModule,
     MatIconModule,
-    MatExpansionModule,
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-    }),
+    MatExpansionModule
   ],
 })
 export class AuthModule {}

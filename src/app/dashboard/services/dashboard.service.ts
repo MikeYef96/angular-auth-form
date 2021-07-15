@@ -1,10 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UsersInterface } from 'src/app/dashboard/model/get-users.model';
+import { UserInterface } from 'src/app/dashboard/model/get-users.model';
 
 import { UserData } from '../../shared/models/user-data.model';
 import { ApiService } from '../../shared/services/api.service';
-import { IUsersState } from '../store/dashboard/dashboard.reducer';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +11,7 @@ import { IUsersState } from '../store/dashboard/dashboard.reducer';
 export class DashboardService extends ApiService {
   private usersStoreKey = 'users';
 
-  private users: UsersInterface[] = [];
+  private users: UserInterface[] = [];
 
   constructor(protected injector: Injector) {
     super(injector);
@@ -22,8 +21,8 @@ export class DashboardService extends ApiService {
     return super.get<UserData>('users');
   }
 
-  getUsers(): Observable<IUsersState> {
-    return super.get<IUsersState>('users');
+  getUsers(): Observable<UserInterface[]> {
+    return super.get<UserInterface[]>('users');
   }
 
   setUsers(users: object): void {
