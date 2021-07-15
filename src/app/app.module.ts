@@ -14,9 +14,17 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { dashboardReducer } from './dashboard/store/dashboard/dashboard.reducer';
-import { UsersModule } from './dashboard/dashboard.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardEffects } from './dashboard/store/dashboard/dashboard.effects';
 import { authReducer } from './auth/store/auth/auth.reducer';
+
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +33,14 @@ import { authReducer } from './auth/store/auth/auth.reducer';
     AppRoutingModule,
     BrowserAnimationsModule,
     AuthModule,
-    UsersModule,
+    DashboardModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatInputModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatTableModule,
     HttpClientModule,
     SharedModule,
     CoreModule,
@@ -33,10 +48,7 @@ import { authReducer } from './auth/store/auth/auth.reducer';
       auth: authReducer,
       users: dashboardReducer,
     }),
-    EffectsModule.forRoot([
-      AuthEffects,
-      DashboardEffects
-    ]),
+    EffectsModule.forRoot([AuthEffects, DashboardEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),

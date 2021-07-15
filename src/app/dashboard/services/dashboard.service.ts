@@ -1,6 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserInterface } from 'src/app/dashboard/model/get-users.model';
+import {
+  UserAssessmentData,
+  UserInterface,
+} from 'src/app/dashboard/model/get-users.model';
 
 import { UserData } from '../../shared/models/user-data.model';
 import { ApiService } from '../../shared/services/api.service';
@@ -9,10 +12,6 @@ import { ApiService } from '../../shared/services/api.service';
   providedIn: 'root',
 })
 export class DashboardService extends ApiService {
-  private usersStoreKey = 'users';
-
-  private users: UserInterface[] = [];
-
   constructor(protected injector: Injector) {
     super(injector);
   }
@@ -25,7 +24,11 @@ export class DashboardService extends ApiService {
     return super.get<UserInterface[]>('users');
   }
 
-  setUsers(users: object): void {
-    localStorage.setItem(this.usersStoreKey, JSON.stringify(users));
+  getAssessments(): Observable<UserAssessmentData> {
+    return super.get<UserAssessmentData>('assessments');
+  }
+
+  getAssessmentsGraph(): Observable<UserAssessmentData> {
+    return super.get<UserAssessmentData>('assessments/graph');
   }
 }

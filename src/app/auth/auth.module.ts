@@ -23,7 +23,7 @@ import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
     MatButtonModule,
     MatInputModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
   ],
 })
 export class AuthModule {}

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersComponent } from './dashboard.component';
-import { UsersRoutingModule } from './dashboard-routing.module';
+import { DashboardComponent } from './dashboard.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,18 +10,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { UserComponent } from './components/user/user.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { MatTableModule } from '@angular/material/table';
+import { UserModule } from './components/user/user.module';
+import { AdminModule } from './components/admin/admin.module';
 
 @NgModule({
-  declarations: [UsersComponent, UserComponent, AdminComponent],
+  declarations: [DashboardComponent, UserComponent, AdminComponent],
   imports: [
+    UserModule,
+    AdminModule,
     CommonModule,
-    UsersRoutingModule,
+    DashboardRoutingModule,
     MatCardModule,
     MatToolbarModule,
     MatButtonModule,
     MatInputModule,
     MatIconModule,
     MatExpansionModule,
+    MatTableModule,
   ],
 })
-export class UsersModule {}
+export class DashboardModule {}

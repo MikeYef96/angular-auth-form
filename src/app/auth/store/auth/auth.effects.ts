@@ -21,7 +21,9 @@ export class AuthEffects {
               this.authService.setToken(userSession.token);
               this.authService.setRole(userSession.role);
 
-              this.router.navigate(['/users']);
+              userSession.role === 'Admin'
+                ? this.router.navigate(['/users'])
+                : this.router.navigate(['/userassessments']);
             });
 
             return authActions.signInSuccess(userSession);
@@ -40,7 +42,6 @@ export class AuthEffects {
     private authService: AuthService,
     private toastr: ToastrService,
     private router: Router,
-    private store: Store,
     private ngZone: NgZone
   ) {}
 }

@@ -42,4 +42,8 @@ export class AuthService extends ApiService {
   getRole(): string | null {
     return localStorage.getItem(this.roleStoreKey);
   }
+
+  hasRole(): boolean {
+    return !!this.getRole();
+  }
 }

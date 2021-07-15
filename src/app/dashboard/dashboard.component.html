@@ -8,9 +8,5 @@
 </div>
 
 <app-user *ngIf="authService.getRole() === 'User'"></app-user>
+
 <app-admin *ngIf="authService.getRole() === 'Admin'"></app-admin>
-
-
-<div class="users-wrapper">
-  {{ (allUsers$ | async) | json }}
-</div>

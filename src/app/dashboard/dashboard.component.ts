@@ -13,20 +13,16 @@ import { IDashboardState } from './store/dashboard/dashboard.reducer';
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersComponent implements OnInit {
-  role$ = this.store.select(selectRole);
-  allUsers$ = this.storeDashboard.select(selectAllUsers);
-
+export class DashboardComponent implements OnInit {
   constructor(
     private store: Store<UserData>,
-    public authService: AuthService,
-    private storeDashboard: Store<IDashboardState>
-  ) {
-    this.storeDashboard.dispatch(getUsersRequest());
-  }
+    public authService: AuthService
+  ) {}
 
-  ngOnInit() {
-    this.storeDashboard.select(selectAllUsers).subscribe(v => console.log(v))
-  }
+  role$ = this.store.select(selectRole);
 
+  // displayedColumns: string[] = ['first_name', 'last_name', 'email', 'groups'];
+  // dataSource = this.storeDashboard.select(selectAllUsers);
+
+  ngOnInit() {}
 }

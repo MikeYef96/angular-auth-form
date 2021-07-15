@@ -1,0 +1,14 @@
+.table-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 40px;
+
+  .mat-elevation-z8 {
+    width: 50%;
+    background: rgb(165, 191, 240);
+    border: solid 1px rgb(70, 69, 69);
+    border-bottom: none;
+    border-radius: 2px;
+  }
+}
