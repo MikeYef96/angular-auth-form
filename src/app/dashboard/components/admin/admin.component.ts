@@ -3,7 +3,10 @@ import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { getUsersRequest } from '../../store/dashboard/dashboard.actions';
 import { IDashboardState } from '../../store/dashboard/dashboard.reducer';
-import { selectAllUsers } from '../../store/dashboard/dashboard.selectors';
+import {
+  selectAllAssessments,
+  selectAllUsers,
+} from '../../store/dashboard/dashboard.selectors';
 
 @Component({
   selector: 'app-admin',
@@ -17,6 +20,15 @@ export class AdminComponent implements OnInit {
   ) {
     this.storeDashboard.dispatch(getUsersRequest());
   }
+
+  displayedAssessmentColumns: string[] = [
+    'id',
+    'name',
+    'users_resolved',
+    'active',
+    'image_url',
+  ];
+  dataAssessmentSource = this.storeDashboard.select(selectAllAssessments);
 
   displayedColumns: string[] = ['first_name', 'last_name', 'email', 'groups'];
   dataSource = this.storeDashboard.select(selectAllUsers);

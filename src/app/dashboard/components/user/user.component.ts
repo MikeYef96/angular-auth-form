@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { getAssessmentsRequest } from '../../store/dashboard/dashboard.actions';
+import { IAssessmentGraphData } from '../../model/get-users.model';
+import {
+  getAssessmentsRequest,
+  getGraphRequest,
+} from '../../store/dashboard/dashboard.actions';
 import { IDashboardState } from '../../store/dashboard/dashboard.reducer';
-import { selectAllAssessments } from '../../store/dashboard/dashboard.selectors';
+import {
+  selectAllAssessments,
+  selectAllAssessmentsGraph,
+} from '../../store/dashboard/dashboard.selectors';
 
 @Component({
   selector: 'app-user',
@@ -13,17 +20,30 @@ import { selectAllAssessments } from '../../store/dashboard/dashboard.selectors'
 export class UserComponent implements OnInit {
   constructor(
     public authService: AuthService,
+    public expandedElement: Store<IAssessmentGraphData>,
     private storeDashboard: Store<IDashboardState>
   ) {
     this.storeDashboard.dispatch(getAssessmentsRequest());
+    this.storeDashboard.dispatch(getGraphRequest());
   }
 
-  displayedColumns: string[] = ['agreeableness', 'drive', 'luck', 'openess'];
-  dataSource = this.storeDashboard.select(selectAllAssessments);
+  displayedAssessmentColumns: string[] = [
+    'id',
+    'name',
+    'users_resolved',
+    'active',
+    'image_url',
+    'graph',
+  ];
+  dataAssessmentSource = this.storeDashboard.select(selectAllAssessments);
 
-  ngOnInit(): void {
+  columnsToDisplay: string[] = ['agreeableness', 'drive', 'luck', 'openess'];
+
+  ngOnInit(): void {}
+
+  getAssessmentGraph(graph: string): void {
     this.storeDashboard
-      .select(selectAllAssessments)
+      .select(selectAllAssessmentsGraph)
       .subscribe((v) => console.log(v));
   }
 }

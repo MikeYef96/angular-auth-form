@@ -46,7 +46,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     CoreModule,
     StoreModule.forRoot({
       auth: authReducer,
-      users: dashboardReducer,
+      dashboard: dashboardReducer,
     }),
     EffectsModule.forRoot([AuthEffects, DashboardEffects]),
     StoreDevtoolsModule.instrument({

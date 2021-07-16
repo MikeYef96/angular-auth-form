@@ -5,8 +5,6 @@ import {
   IUserAssessment,
   UserInterface,
 } from 'src/app/dashboard/model/get-users.model';
-
-import { UserData } from '../../shared/models/user-data.model';
 import { ApiService } from '../../shared/services/api.service';
 
 @Injectable({
@@ -17,10 +15,6 @@ export class DashboardService extends ApiService {
     super(injector);
   }
 
-  // getUserData(): Observable<UserData> {
-  //   return super.get<UserData>('users');
-  // }
-
   getUsers(): Observable<UserInterface[]> {
     return super.get<UserInterface[]>('users');
   }
@@ -29,7 +23,7 @@ export class DashboardService extends ApiService {
     return super.get<IAssessmentData[]>('userassessments');
   }
 
-  getAssessmentsGraph(): Observable<IUserAssessment> {
-    return super.get<IUserAssessment>('userassessments/graph');
+  getAssessmentsGraph(): Observable<IUserAssessment[]> {
+    return super.get<IUserAssessment[]>('userassessments/graph');
   }
 }

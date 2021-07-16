@@ -17,7 +17,7 @@ import { DashboardEffects } from '../dashboard/store/dashboard/dashboard.effects
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot({ user: dashboardReducer }),
+    StoreModule.forRoot({ dashboard: dashboardReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),

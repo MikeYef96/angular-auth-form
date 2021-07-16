@@ -1,3 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100px;
+  background: #3070a5;
+}
+
+.header-container {
+  width: calc(100vw - 30px);
+}
+
+.title {
+  height: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  color: #ffffff;
+}
+
 .table-wrapper {
   display: flex;
   justify-content: center;
@@ -5,10 +24,21 @@
   padding-bottom: 40px;
 
   .mat-elevation-z8 {
-    width: 50%;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 60px);
     background: rgb(165, 191, 240);
     border: solid 1px rgb(70, 69, 69);
     border-bottom: none;
     border-radius: 2px;
+
+    .column-container {
+      width: fit-content;
+      margin-right: 40px;
+    }
+
+    .graph-btn {
+      background: none;
+    }
   }
 }

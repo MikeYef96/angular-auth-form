@@ -1,25 +1,21 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import * as dashboardActions from './dashboard.actions';
-import { IAssessmentData, UserInterface } from '../../model/get-users.model';
+import {
+  IAssessmentData,
+  IUserAssessment,
+  UserInterface,
+} from '../../model/get-users.model';
 
 export interface IDashboardState {
   usersList: UserInterface[];
   assessmentsList: IAssessmentData[];
-  // userAssessments: IDashboardAssessments[];
+  assessmentsGraph: IUserAssessment[];
 }
 
 export const initialState: IDashboardState = {
   usersList: [],
-  // assessments: {
-  //   data: {
-  //     agreeableness: 0,
-  //     drive: 0,
-  //     luck: 0,
-  //     openess: 0,
-  //   },
-  //   type: 'bar',
-  // },
+  assessmentsGraph: [],
   assessmentsList: [],
 };
 
@@ -45,5 +41,11 @@ const reducer = createReducer<IDashboardState>(
   on(dashboardActions.getAssessmentsSuccess, (state, { assessments }) => ({
     ...state,
     assessmentsList: assessments,
+  })),
+
+  //Get Assessment Graph
+  on(dashboardActions.getGraphSuccess, (state, { graph }) => ({
+    ...state,
+    assessmentsGraph: graph,
   }))
 );

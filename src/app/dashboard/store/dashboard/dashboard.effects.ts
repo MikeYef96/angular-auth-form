@@ -43,7 +43,7 @@ export class DashboardEffects {
     )
   );
 
-  getAssessments = createEffect(() =>
+  getAssessments$ = createEffect(() =>
     this.actions$.pipe(
       ofType(dashboardActions.getAssessmentsRequest),
       switchMap(() => {
@@ -57,7 +57,25 @@ export class DashboardEffects {
           }),
           catchError((error) => {
             this.toastr.error('Oops, login failed');
-            return of(dashboardActions.getUsersError());
+            return of(dashboardActions.getAssessmentsError());
+          })
+        );
+      })
+    )
+  );
+
+  getAssessmentsGraph = createEffect(() =>
+    this.actions$.pipe(
+      ofType(dashboardActions.getGraphRequest),
+      switchMap(() => {
+        return this.dashboardService.getAssessmentsGraph().pipe(
+          map((graph) => {
+            console.log(graph);
+            return dashboardActions.getGraphSuccess({ graph });
+          }),
+          catchError((error) => {
+            this.toastr.error('Oops, login failed');
+            return of(dashboardActions.getGraphError());
           })
         );
       })

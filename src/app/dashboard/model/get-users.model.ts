@@ -6,16 +6,16 @@ export interface UserInterface {
 }
 
 export interface IUserAssessment {
-  data: IAssessmentData;
+  data: IAssessmentGraphData;
   type: string;
 }
 
-// export interface IAssessmentData {
-//   agreeableness: number;
-//   drive: number;
-//   luck: number;
-//   openess: number;
-// }
+export interface IAssessmentGraphData {
+  agreeableness: number;
+  drive: number;
+  luck: number;
+  openess: number;
+}
 
 export interface IAssessmentData {
   id: number;
@@ -24,11 +24,3 @@ export interface IAssessmentData {
   active: boolean;
   image_url: string;
 }
-
-// export interface IDashboardAssessments {
-//   id: number;
-//   name: string;
-//   users_resolved: number;
-//   active: boolean;
-//   image_url: string;
-// }
