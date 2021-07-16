@@ -13,9 +13,10 @@ import { AdminComponent } from './components/admin/admin.component';
 import { MatTableModule } from '@angular/material/table';
 import { UserModule } from './components/user/user.module';
 import { AdminModule } from './components/admin/admin.module';
+import { ChartComponent } from './components/chart/chart.component';
 
 @NgModule({
-  declarations: [DashboardComponent, UserComponent, AdminComponent],
+  declarations: [DashboardComponent, UserComponent, AdminComponent, ChartComponent],
   imports: [
     UserModule,
     AdminModule,

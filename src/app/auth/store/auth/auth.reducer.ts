@@ -20,13 +20,12 @@ const reducer = createReducer<AuthStateInterface>(
 
   on(authActions.signInRequest, (state) => ({
     ...state,
-    isAuthorized: true,
   })),
 
   on(authActions.signInSuccess, (state, user) => ({
     ...state,
     userData: user,
-    isAuthorized: false,
+    isAuthorized: true,
   })),
 
   on(authActions.signInError, (state) => ({

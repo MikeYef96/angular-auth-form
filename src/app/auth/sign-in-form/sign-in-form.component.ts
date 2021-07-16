@@ -27,14 +27,6 @@ export class SignInFormComponent implements OnInit {
     ]),
   });
 
-  get email(): AbstractControl {
-    return this.form.controls.email;
-  }
-
-  get password(): AbstractControl {
-    return this.form.controls.password;
-  }
-
   constructor(private store: Store<AuthStateInterface>) {}
 
   ngOnInit(): void {}

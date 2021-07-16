@@ -23,7 +23,7 @@ export class DashboardService extends ApiService {
     return super.get<IAssessmentData[]>('userassessments');
   }
 
-  getAssessmentsGraph(): Observable<IUserAssessment[]> {
-    return super.get<IUserAssessment[]>('userassessments/graph');
+  getAssessmentsGraph({ id }: any): Observable<IUserAssessment[]> {
+    return super.get<IUserAssessment[]>('userassessments/graph', { id });
   }
 }

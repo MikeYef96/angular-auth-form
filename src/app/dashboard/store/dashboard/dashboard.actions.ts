@@ -26,7 +26,10 @@ export const getAssessmentsError = createAction(
   '[Dashboard] Get Assessments Error'
 );
 
-export const getGraphRequest = createAction('[Dashboard] Get Graph Request');
+export const getGraphRequest = createAction(
+  '[Dashboard] Get Graph Request',
+  props<{ id: IUserAssessment[] }>()
+);
 export const getGraphSuccess = createAction(
   '[Dashboard] Get Graph Success',
   props<{ graph: IUserAssessment[] }>()

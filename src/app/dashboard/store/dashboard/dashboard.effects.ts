@@ -2,7 +2,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, Input, NgZone } from '@angular/core';
 
 import * as dashboardActions from './dashboard.actions';
 import { DashboardService } from '../../../dashboard/services/dashboard.service';
@@ -56,7 +56,7 @@ export class DashboardEffects {
             return dashboardActions.getAssessmentsSuccess({ assessments });
           }),
           catchError((error) => {
-            this.toastr.error('Oops, login failed');
+            this.toastr.error('Oops, get users failed');
             return of(dashboardActions.getAssessmentsError());
           })
         );
@@ -67,14 +67,14 @@ export class DashboardEffects {
   getAssessmentsGraph = createEffect(() =>
     this.actions$.pipe(
       ofType(dashboardActions.getGraphRequest),
-      switchMap(() => {
-        return this.dashboardService.getAssessmentsGraph().pipe(
+      switchMap(({ id }) => {
+        return this.dashboardService.getAssessmentsGraph({ id }).pipe(
           map((graph) => {
             console.log(graph);
             return dashboardActions.getGraphSuccess({ graph });
           }),
           catchError((error) => {
-            this.toastr.error('Oops, login failed');
+            this.toastr.error('Oops, get reports failed');
             return of(dashboardActions.getGraphError());
           })
         );

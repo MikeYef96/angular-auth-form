@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { IAssessmentGraphData } from '../../model/get-users.model';
@@ -18,13 +18,13 @@ import {
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
+  @Input() id = 1;
+
   constructor(
     public authService: AuthService,
-    public expandedElement: Store<IAssessmentGraphData>,
     private storeDashboard: Store<IDashboardState>
   ) {
     this.storeDashboard.dispatch(getAssessmentsRequest());
-    this.storeDashboard.dispatch(getGraphRequest());
   }
 
   displayedAssessmentColumns: string[] = [
@@ -37,13 +37,11 @@ export class UserComponent implements OnInit {
   ];
   dataAssessmentSource = this.storeDashboard.select(selectAllAssessments);
 
-  columnsToDisplay: string[] = ['agreeableness', 'drive', 'luck', 'openess'];
-
   ngOnInit(): void {}
 
-  getAssessmentGraph(graph: string): void {
-    this.storeDashboard
-      .select(selectAllAssessmentsGraph)
-      .subscribe((v) => console.log(v));
+  getAssessmentGraph(): void {
+    this.id + 1;
+    console.log(this.id);
+    // this.storeDashboard.dispatch(getGraphRequest(selectAllAssessmentsGraph));
   }
 }
