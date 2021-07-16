@@ -1,23 +1,23 @@
 <div class="table-wrapper">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="Agreeableness">
+    <ng-container matColumnDef="agreeableness">
       <th mat-header-cell *matHeaderCellDef>Agreeableness</th>
-      <td mat-cell *matCellDef="let element">{{ element.first_name }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.agreeableness }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="Drive">
+    <ng-container matColumnDef="drive">
       <th mat-header-cell *matHeaderCellDef>Drive</th>
-      <td mat-cell *matCellDef="let element">{{ element.last_name }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.drive }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="Luck">
+    <ng-container matColumnDef="luck">
       <th mat-header-cell *matHeaderCellDef>Luck</th>
-      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.luck }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="Openess">
+    <ng-container matColumnDef="openess">
       <th mat-header-cell *matHeaderCellDef>Openess</th>
-      <td mat-cell *matCellDef="let element">{{ element.groups }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.openess }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

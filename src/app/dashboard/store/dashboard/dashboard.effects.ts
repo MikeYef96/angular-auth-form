@@ -28,8 +28,8 @@ export class DashboardEffects {
           map((users) => {
             this.ngZone.run(() => {
               this.authService.getRole() === 'Admin'
-                ? this.router.navigate(['/users'])
-                : this.router.navigate(['/userassessments']);
+                ? this.router.navigate(['/dashboard/users-data'])
+                : this.router.navigate(['dashboard/userassessments']);
             });
 
             return dashboardActions.getUsersSuccess({ users });
@@ -49,6 +49,10 @@ export class DashboardEffects {
       switchMap(() => {
         return this.dashboardService.getAssessments().pipe(
           map((assessments) => {
+            this.ngZone.run(() => {
+              this.router.navigate(['dashboard/userassessments']);
+            });
+
             return dashboardActions.getAssessmentsSuccess({ assessments });
           }),
           catchError((error) => {

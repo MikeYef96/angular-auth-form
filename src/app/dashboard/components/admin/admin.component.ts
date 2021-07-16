@@ -18,15 +18,10 @@ export class AdminComponent implements OnInit {
     this.storeDashboard.dispatch(getUsersRequest());
   }
 
-  allUsers$ = this.storeDashboard.select(selectAllUsers);
-  firstName$ = this.storeDashboard
-    .select(selectAllUsers)
-    .subscribe((v) => v.map((first_name: any) => first_name));
-
   displayedColumns: string[] = ['first_name', 'last_name', 'email', 'groups'];
   dataSource = this.storeDashboard.select(selectAllUsers);
 
   ngOnInit(): void {
-    this.storeDashboard.select(selectAllUsers).subscribe((v) => console.log(v));
+    // this.storeDashboard.select(selectAllUsers).subscribe((v) => console.log(v));
   }
 }

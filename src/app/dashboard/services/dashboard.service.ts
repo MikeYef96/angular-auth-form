@@ -1,7 +1,8 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
-  UserAssessmentData,
+  IAssessmentData,
+  IUserAssessment,
   UserInterface,
 } from 'src/app/dashboard/model/get-users.model';
 
@@ -16,19 +17,19 @@ export class DashboardService extends ApiService {
     super(injector);
   }
 
-  getUserData(): Observable<UserData> {
-    return super.get<UserData>('users');
-  }
+  // getUserData(): Observable<UserData> {
+  //   return super.get<UserData>('users');
+  // }
 
   getUsers(): Observable<UserInterface[]> {
     return super.get<UserInterface[]>('users');
   }
 
-  getAssessments(): Observable<UserAssessmentData> {
-    return super.get<UserAssessmentData>('assessments');
+  getAssessments(): Observable<IAssessmentData[]> {
+    return super.get<IAssessmentData[]>('userassessments');
   }
 
-  getAssessmentsGraph(): Observable<UserAssessmentData> {
-    return super.get<UserAssessmentData>('assessments/graph');
+  getAssessmentsGraph(): Observable<IUserAssessment> {
+    return super.get<IUserAssessment>('userassessments/graph');
   }
 }
