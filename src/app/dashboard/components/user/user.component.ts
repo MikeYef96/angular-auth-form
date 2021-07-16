@@ -18,12 +18,7 @@ export class UserComponent implements OnInit {
     this.storeDashboard.dispatch(getAssessmentsRequest());
   }
 
-  allUsers$ = this.storeDashboard.select(selectAllAssessments);
-  firstName$ = this.storeDashboard
-    .select(selectAllAssessments)
-    .subscribe((v) => v.map((first_name: any) => first_name));
-
-  displayedColumns: string[] = ['Agreeableness', 'Drive', 'Luck', 'Openess'];
+  displayedColumns: string[] = ['agreeableness', 'drive', 'luck', 'openess'];
   dataSource = this.storeDashboard.select(selectAllAssessments);
 
   ngOnInit(): void {

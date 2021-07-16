@@ -1,24 +1,26 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import * as dashboardActions from './dashboard.actions';
-import { UserAssessmentData, UserInterface } from '../../model/get-users.model';
+import { IAssessmentData, UserInterface } from '../../model/get-users.model';
 
 export interface IDashboardState {
   usersList: UserInterface[];
-  assessments: UserAssessmentData;
+  assessmentsList: IAssessmentData[];
+  // userAssessments: IDashboardAssessments[];
 }
 
 export const initialState: IDashboardState = {
   usersList: [],
-  assessments: {
-    data: {
-      Agreeableness: 0,
-      Drive: 0,
-      Luck: 0,
-      Openess: 0,
-    },
-    type: 'bar',
-  },
+  // assessments: {
+  //   data: {
+  //     agreeableness: 0,
+  //     drive: 0,
+  //     luck: 0,
+  //     openess: 0,
+  //   },
+  //   type: 'bar',
+  // },
+  assessmentsList: [],
 };
 
 export function dashboardReducer(

@@ -21,9 +21,11 @@ export class AuthEffects {
               this.authService.setToken(userSession.token);
               this.authService.setRole(userSession.role);
 
-              userSession.role === 'Admin'
-                ? this.router.navigate(['/users'])
-                : this.router.navigate(['/userassessments']);
+              // userSession.role === 'Admin'
+              //   ? this.router.navigate(['/users'])
+              //   :
+
+              this.router.navigate(['/dashboard/userassessments']);
             });
 
             return authActions.signInSuccess(userSession);

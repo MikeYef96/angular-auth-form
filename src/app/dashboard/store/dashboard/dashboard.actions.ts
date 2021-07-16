@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import {
-  UserAssessmentData,
+  IAssessmentData,
+  IUserAssessment,
   UserInterface,
 } from '../../../dashboard/model/get-users.model';
 
@@ -17,8 +18,8 @@ export const getAssessmentsRequest = createAction(
   '[Dashboard] Get Assessments Request'
 );
 export const getAssessmentsSuccess = createAction(
-  '[Dashboard] Get Users Success',
-  props<{ assessments: UserAssessmentData }>()
+  '[Dashboard] Get Assessments Success',
+  props<{ assessments: IAssessmentData[] }>()
 );
 export const getAssessmentsError = createAction(
   '[Dashboard] Get Assessments Error'

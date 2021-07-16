@@ -4,10 +4,8 @@ import * as authActions from './auth.actions';
 import { AuthStateInterface } from '../../model/state.model';
 
 export const initState: AuthStateInterface = {
-  auth: {
-    authorization: false,
-    userData: null,
-  },
+  isAuthorized: false,
+  userData: null,
 };
 
 export function authReducer(
@@ -22,32 +20,17 @@ const reducer = createReducer<AuthStateInterface>(
 
   on(authActions.signInRequest, (state) => ({
     ...state,
-    authorization: true,
+    isAuthorized: true,
   })),
 
   on(authActions.signInSuccess, (state, user) => ({
     ...state,
     userData: user,
-    authorization: false,
+    isAuthorized: false,
   })),
 
   on(authActions.signInError, (state) => ({
     ...state,
-    authorization: false,
-  })),
-
-  on(authActions.signUpRequest, (state) => ({
-    ...state,
-    authorization: true,
-  })),
-
-  on(authActions.signUpSuccess, (state) => ({
-    ...state,
-    authorization: false,
-  })),
-
-  on(authActions.signUpError, (state) => ({
-    ...state,
-    authorization: false,
+    isAuthorized: false,
   }))
 );
