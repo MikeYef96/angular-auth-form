@@ -1,4 +1,4 @@
-export interface UserData {
+export interface IUserData {
   firstName: string;
   lastName: string;
   role: string;

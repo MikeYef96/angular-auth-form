@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IAssessmentGraphData } from '../../model/get-users.model';
+
+import { CHART_DATA_ARRAY } from '../../constants/chart_data';
+import {
+  IAssessmentData,
+  IAssessmentGraphData,
+} from '../../model/get-users.model';
+import { getGraphRequest } from '../../store/dashboard.actions';
+import { IDashboardState } from '../../store/dashboard.reducer';
+import { selectAllAssessmentsGraph } from '../../store/dashboard.selectors';
 
 @Component({
   selector: 'app-chart',
@@ -8,9 +16,9 @@ import { IAssessmentGraphData } from '../../model/get-users.model';
   styleUrls: ['./chart.component.scss'],
 })
 export class ChartComponent implements OnInit {
-  constructor(public expandedElement: Store<IAssessmentGraphData>) {}
+  constructor(public dataSource: Store<IDashboardState>) {}
 
-  columnsToDisplay: string[] = ['agreeableness', 'drive', 'luck', 'openess'];
+  columnsToDisplay: string[] = CHART_DATA_ARRAY;
 
   ngOnInit(): void {}
 }

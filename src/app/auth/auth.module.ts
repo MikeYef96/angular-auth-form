@@ -10,7 +10,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
-import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
+import { SignInFormComponent } from './components/sign-in-form/sign-in-form.component';
 
 @NgModule({
   declarations: [SignInFormComponent, AuthComponent],

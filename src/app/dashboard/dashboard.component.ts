@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UserData } from '../shared/models/user-data.model';
+import { IUserData } from '../shared/models/user-data.model';
 import { AuthService } from '../auth/services/auth.service';
-import { selectRole } from '../auth/store/auth/auth.selectors';
-import { IDashboardState } from './store/dashboard/dashboard.reducer';
-import { getAssessmentsRequest } from './store/dashboard/dashboard.actions';
-import { selectAllAssessments } from './store/dashboard/dashboard.selectors';
+import { selectRole } from '../auth/store/auth.selectors';
+import { IDashboardState } from './store/dashboard.reducer';
+import { getAssessmentsRequest } from './store/dashboard.actions';
+import { selectAllAssessments } from './store/dashboard.selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +15,7 @@ import { selectAllAssessments } from './store/dashboard/dashboard.selectors';
 })
 export class DashboardComponent implements OnInit {
   constructor(
-    private store: Store<UserData>,
+    private store: Store<IUserData>,
     public authService: AuthService,
     private storeDashboard: Store<IDashboardState>
   ) {
@@ -24,13 +24,6 @@ export class DashboardComponent implements OnInit {
 
   role$ = this.store.select(selectRole);
 
-  displayedColumns: string[] = [
-    'id',
-    'name',
-    'users_resolved',
-    'active',
-    'image_url',
-  ];
   dataSource = this.storeDashboard.select(selectAllAssessments);
 
   ngOnInit() {

@@ -7,10 +7,18 @@ import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as authActions from './auth.actions';
-import { AuthService } from '../../../auth/services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable()
 export class AuthEffects {
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private toastr: ToastrService,
+    private router: Router,
+    private ngZone: NgZone
+  ) {}
+
   signIn$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.signInRequest),
@@ -21,11 +29,7 @@ export class AuthEffects {
               this.authService.setToken(userSession.token);
               this.authService.setRole(userSession.role);
 
-              // userSession.role === 'Admin'
-              //   ? this.router.navigate(['/users'])
-              //   :
-
-              this.router.navigate(['/dashboard/userassessments']);
+              this.router.navigate(['/dashboard']);
             });
 
             return authActions.signInSuccess(userSession);
@@ -38,12 +42,4 @@ export class AuthEffects {
       })
     )
   );
-
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private toastr: ToastrService,
-    private router: Router,
-    private ngZone: NgZone
-  ) {}
 }

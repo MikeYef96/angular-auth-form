@@ -1,5 +1,5 @@
-import { UserData } from './user-data.model';
+import { IUserData } from './user-data.model';
 
-export interface DsUserSessionInterface {
-  user: { user: UserData };
+export interface IDsUserSession {
+  user: IUserData;
 }

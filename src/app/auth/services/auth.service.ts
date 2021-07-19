@@ -1,8 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserData } from 'src/app/shared/models/user-data.model';
 
-import { DsUserSessionInterface } from '../../shared/models/ds-user-session.model';
+import { IUserData } from 'src/app/shared/models/user-data.model';
 import { ApiService } from '../../shared/services/api.service';
 
 @Injectable({
@@ -16,8 +15,8 @@ export class AuthService extends ApiService {
     super(injector);
   }
 
-  login({ email, password }: any): Observable<UserData> {
-    return super.post<UserData>('login', {
+  login({ email, password }: any): Observable<IUserData> {
+    return super.post<IUserData>('login', {
       email,
       password,
     });

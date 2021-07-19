@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { getUsersRequest } from '../../store/dashboard/dashboard.actions';
-import { IDashboardState } from '../../store/dashboard/dashboard.reducer';
+import { USERS_DATA_TABLE_ADMIN_ARRAY } from '../../constants/admin';
+import { getUsersRequest } from '../../store/dashboard.actions';
+import { IDashboardState } from '../../store/dashboard.reducer';
 import {
   selectAllAssessments,
   selectAllUsers,
-} from '../../store/dashboard/dashboard.selectors';
+} from '../../store/dashboard.selectors';
 
 @Component({
   selector: 'app-admin',
@@ -21,19 +22,10 @@ export class AdminComponent implements OnInit {
     this.storeDashboard.dispatch(getUsersRequest());
   }
 
-  displayedAssessmentColumns: string[] = [
-    'id',
-    'name',
-    'users_resolved',
-    'active',
-    'image_url',
-  ];
-  dataAssessmentSource = this.storeDashboard.select(selectAllAssessments);
-
-  displayedColumns: string[] = ['first_name', 'last_name', 'email', 'groups'];
+  displayedColumns: string[] = USERS_DATA_TABLE_ADMIN_ARRAY;
   dataSource = this.storeDashboard.select(selectAllUsers);
 
   ngOnInit(): void {
-    // this.storeDashboard.select(selectAllUsers).subscribe((v) => console.log(v));
+    // this.storeDashboard.select(selectAllUsers).subscribe((user) => console.log(user));
   }
 }

@@ -3,14 +3,14 @@ import {
   IAssessmentData,
   IAssessmentGraphData,
   IUserAssessment,
-  UserInterface,
-} from '../../../dashboard/model/get-users.model';
+  IUser,
+} from '../../dashboard/model/get-users.model';
 
 //Role Admin
 export const getUsersRequest = createAction('[Dashboard] Get Users Request');
 export const getUsersSuccess = createAction(
   '[Dashboard] Get Users Success',
-  props<{ users: UserInterface[] }>()
+  props<{ users: IUser[] }>()
 );
 export const getUsersError = createAction('[Dashboard] Get Assessments Error');
 
@@ -27,8 +27,8 @@ export const getAssessmentsError = createAction(
 );
 
 export const getGraphRequest = createAction(
-  '[Dashboard] Get Graph Request',
-  props<{ id: IUserAssessment[] }>()
+  '[Dashboard] Get Graph Request'
+  // props<{ id: number }>()
 );
 export const getGraphSuccess = createAction(
   '[Dashboard] Get Graph Success',

@@ -5,9 +5,10 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { Injectable, Input, NgZone } from '@angular/core';
 
 import * as dashboardActions from './dashboard.actions';
-import { DashboardService } from '../../../dashboard/services/dashboard.service';
+import { DashboardService } from '../../dashboard/services/dashboard.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { IAssessmentData } from '../model/get-users.model';
 
 @Injectable()
 export class DashboardEffects {
@@ -28,8 +29,8 @@ export class DashboardEffects {
           map((users) => {
             this.ngZone.run(() => {
               this.authService.getRole() === 'Admin'
-                ? this.router.navigate(['/dashboard/users-data'])
-                : this.router.navigate(['dashboard/userassessments']);
+                ? this.router.navigate(['dashboard/users-data'])
+                : this.router.navigate(['dashboard']);
             });
 
             return dashboardActions.getUsersSuccess({ users });
@@ -50,7 +51,7 @@ export class DashboardEffects {
         return this.dashboardService.getAssessments().pipe(
           map((assessments) => {
             this.ngZone.run(() => {
-              this.router.navigate(['dashboard/userassessments']);
+              this.router.navigate(['/dashboard']);
             });
 
             return dashboardActions.getAssessmentsSuccess({ assessments });
@@ -64,11 +65,12 @@ export class DashboardEffects {
     )
   );
 
-  getAssessmentsGraph = createEffect(() =>
+  getAssessmentsGraph$ = createEffect(() =>
     this.actions$.pipe(
       ofType(dashboardActions.getGraphRequest),
-      switchMap(({ id }) => {
-        return this.dashboardService.getAssessmentsGraph({ id }).pipe(
+      switchMap(() => {
+        const id = 1;
+        return this.dashboardService.getAssessmentsGraph(id).pipe(
           map((graph) => {
             console.log(graph);
             return dashboardActions.getGraphSuccess({ graph });

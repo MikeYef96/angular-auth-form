@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth.component';
-import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
+import { SignInFormComponent } from './components/sign-in-form/sign-in-form.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'auth',
     component: AuthComponent,
     children: [
       {

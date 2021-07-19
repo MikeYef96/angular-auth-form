@@ -1,6 +1,6 @@
-import { UserData } from '../../shared/models/user-data.model';
+import { IUserData } from '../../shared/models/user-data.model';
 
 export interface AuthStateInterface {
   isAuthorized: boolean;
-  userData: UserData | null;
+  userData: IUserData | null;
 }

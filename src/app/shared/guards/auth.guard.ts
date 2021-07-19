@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (!this.authService.hasToken() || !this.authService.hasRole()) {
-      this.router.navigate(['login']);
+      this.router.navigate(['auth/login']);
       return false;
     }
 
@@ -35,7 +35,7 @@ export class AuthGuard implements CanActivate {
     const userRole = this.authService.getRole();
 
     if (route.data.role.indexOf(userRole) === -1) {
-      this.router.navigate(['dashboard/userassessments']);
+      this.router.navigate(['dashboard']);
       return false;
     }
 

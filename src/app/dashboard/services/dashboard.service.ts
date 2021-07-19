@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 import {
   IAssessmentData,
   IUserAssessment,
-  UserInterface,
+  IUser,
+  IAssessmentGraphData,
 } from 'src/app/dashboard/model/get-users.model';
 import { ApiService } from '../../shared/services/api.service';
 
@@ -15,15 +16,17 @@ export class DashboardService extends ApiService {
     super(injector);
   }
 
-  getUsers(): Observable<UserInterface[]> {
-    return super.get<UserInterface[]>('users');
+  getUsers(): Observable<IUser[]> {
+    return super.get<IUser[]>('users');
   }
 
   getAssessments(): Observable<IAssessmentData[]> {
     return super.get<IAssessmentData[]>('userassessments');
   }
 
-  getAssessmentsGraph({ id }: any): Observable<IUserAssessment[]> {
-    return super.get<IUserAssessment[]>('userassessments/graph', { id });
+  getAssessmentsGraph(id: number): Observable<IUserAssessment[]> {
+    return super.get<IUserAssessment[]>(`userassessments/graph?id=${id}`, {
+      id,
+    });
   }
 }

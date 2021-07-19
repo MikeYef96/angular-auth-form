@@ -4,11 +4,12 @@ import * as dashboardActions from './dashboard.actions';
 import {
   IAssessmentData,
   IUserAssessment,
-  UserInterface,
-} from '../../model/get-users.model';
+  IUser,
+  IAssessmentGraphData,
+} from '../model/get-users.model';
 
 export interface IDashboardState {
-  usersList: UserInterface[];
+  usersList: IUser[];
   assessmentsList: IAssessmentData[];
   assessmentsGraph: IUserAssessment[];
 }

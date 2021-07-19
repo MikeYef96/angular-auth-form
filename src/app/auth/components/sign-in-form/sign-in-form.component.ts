@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AuthStateInterface } from 'src/app/auth/model/state.model';
-import { signInRequest } from '../store/auth/auth.actions';
+import { signInRequest } from '../../store/auth.actions';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -16,6 +16,8 @@ import { signInRequest } from '../store/auth/auth.actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInFormComponent implements OnInit {
+  constructor(private store: Store<AuthStateInterface>) {}
+
   form: FormGroup = new FormGroup({
     email: new FormControl('admin@deepersignals.com', [
       Validators.email,
@@ -26,8 +28,6 @@ export class SignInFormComponent implements OnInit {
       Validators.required,
     ]),
   });
-
-  constructor(private store: Store<AuthStateInterface>) {}
 
   ngOnInit(): void {}
 
