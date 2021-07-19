@@ -1,0 +1,152 @@
+<div class="header">
+  <h2 class="title">Iteam</h2>
+  <div class="header-container" *ngIf="authService.getRole() === 'Admin'">
+    <a routerLink="/dashboard/users-data" mat-button class="auth-header__button"
+      >To Admin</a
+    >
+  </div>
+</div>
+
+<div class="table-wrapper">
+  <table
+    mat-table
+    [dataSource]="dataAssessmentSource"
+    multiTemplateDataRows
+    class="mat-elevation-z8"
+  >
+    <ng-container
+      matColumnDef="{{ column }}"
+      *ngFor="let column of columnsToDisplay"
+    >
+      <ng-container class="column-container" *ngIf="column === 'id'">
+        <th mat-header-cell *matHeaderCellDef>{{ "Id" }}</th>
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+      </ng-container>
+
+      <ng-container class="column-container" *ngIf="column === 'name'">
+        <th mat-header-cell *matHeaderCellDef>{{ "Name" }}</th>
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+      </ng-container>
+
+      <ng-container
+        class="column-container"
+        *ngIf="column === 'users_resolved'"
+      >
+        <th mat-header-cell *matHeaderCellDef>{{ "User Resolved" }}</th>
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+      </ng-container>
+
+      <ng-container class="column-container" *ngIf="column === 'active'">
+        <th mat-header-cell *matHeaderCellDef>{{ "Active" }}</th>
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+      </ng-container>
+
+      <ng-container class="column-container" *ngIf="column === 'image_url'">
+        <th mat-header-cell *matHeaderCellDef>{{ "Image" }}</th>
+        <td mat-cell *matCellDef="let element">
+          <img [src]="element[column]" alt="image" />
+        </td>
+      </ng-container>
+
+      <ng-container class="column-container" *ngIf="column === 'graph'">
+        <th mat-header-cell *matHeaderCellDef>{{ "Graph" }}</th>
+        <td mat-cell *matCellDef="let element">
+          <img
+            src="../../../../assets/svg/bar-chart.svg"
+            alt="graph"
+            (click)="
+              expandedElement = expandedElement === element ? null : element
+            "
+          />
+        </td>
+      </ng-container>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td
+        mat-cell
+        *matCellDef="let element"
+        [attr.colspan]="columnsToDisplay.length"
+      >
+        <div
+          class="example-element-detail"
+          [@detailExpand]="
+            element == expandedElement ? 'expanded' : 'collapsed'
+          "
+        >
+          <app-chart [itemId]="element.id"></app-chart>
+        </div></td
+    ></ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr
+      mat-row
+      *matRowDef="let element; columns: columnsToDisplay"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: ['expandedDetail']"
+      class="example-detail-row"
+    ></tr>
+  </table>
+</div>
+
+<div class="table-wrapper">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    multiTemplateDataRows
+    class="mat-elevation-z8"
+  >
+    <ng-container
+      matColumnDef="{{ column }}"
+      *ngFor="let column of columnsToDisplay"
+    >
+      <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+      <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td
+        mat-cell
+        *matCellDef="let element"
+        [attr.colspan]="columnsToDisplay.length"
+      >
+        <div
+          class="example-element-detail"
+          [@detailExpand]="
+            element == expandedElement ? 'expanded' : 'collapsed'
+          "
+        >
+          <div class="example-element-diagram">
+            <div class="example-element-position">{{ element.id }}</div>
+            <div class="example-element-symbol">{{ element.name }}</div>
+            <div class="example-element-name">{{ element.resolved_users }}</div>
+            <div class="example-element-weight">{{ element.active }}</div>
+            <div class="example-element-weight">{{ element.image }}</div>
+            <div class="example-element-weight">{{ element.graph }}</div>
+          </div>
+          <div class="example-element-description">
+            {{ element.description }}
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr
+      mat-row
+      *matRowDef="let element; columns: columnsToDisplay"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: ['expandedDetail']"
+      class="example-detail-row"
+    ></tr>
+  </table>
+</div>

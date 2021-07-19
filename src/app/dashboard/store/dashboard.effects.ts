@@ -14,11 +14,8 @@ import { IAssessmentData } from '../model/get-users.model';
 export class DashboardEffects {
   constructor(
     private actions$: Actions,
-    private authService: AuthService,
     private dashboardService: DashboardService,
-    private toastr: ToastrService,
-    private router: Router,
-    private ngZone: NgZone
+    private toastr: ToastrService
   ) {}
 
   getUsers$ = createEffect(() =>
@@ -26,15 +23,7 @@ export class DashboardEffects {
       ofType(dashboardActions.getUsersRequest),
       switchMap(() => {
         return this.dashboardService.getUsers().pipe(
-          map((users) => {
-            this.ngZone.run(() => {
-              this.authService.getRole() === 'Admin'
-                ? this.router.navigate(['dashboard/users-data'])
-                : this.router.navigate(['dashboard']);
-            });
-
-            return dashboardActions.getUsersSuccess({ users });
-          }),
+          map((users) => dashboardActions.getUsersSuccess({ users })),
           catchError((error) => {
             this.toastr.error('Oops, login failed');
             return of(dashboardActions.getUsersError());
@@ -49,13 +38,9 @@ export class DashboardEffects {
       ofType(dashboardActions.getAssessmentsRequest),
       switchMap(() => {
         return this.dashboardService.getAssessments().pipe(
-          map((assessments) => {
-            this.ngZone.run(() => {
-              this.router.navigate(['/dashboard']);
-            });
-
-            return dashboardActions.getAssessmentsSuccess({ assessments });
-          }),
+          map((assessments) =>
+            dashboardActions.getAssessmentsSuccess({ assessments })
+          ),
           catchError((error) => {
             this.toastr.error('Oops, get users failed');
             return of(dashboardActions.getAssessmentsError());

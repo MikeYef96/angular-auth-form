@@ -6,7 +6,8 @@ export interface IUser {
 }
 
 export interface IUserAssessment {
-  data: IAssessmentGraphData;
+  id: number;
+  data: IAssessmentGraphData[];
   type: string;
 }
 
@@ -23,4 +24,12 @@ export interface IAssessmentData {
   users_resolved: number;
   active: boolean;
   image_url: string;
+}
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+  description: string;
 }

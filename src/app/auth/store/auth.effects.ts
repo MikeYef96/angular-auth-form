@@ -29,7 +29,7 @@ export class AuthEffects {
               this.authService.setToken(userSession.token);
               this.authService.setRole(userSession.role);
 
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/dashboard/reports']);
             });
 
             return authActions.signInSuccess(userSession);

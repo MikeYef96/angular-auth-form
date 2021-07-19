@@ -10,11 +10,11 @@ import {
 } from '../../store/dashboard.selectors';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss'],
+  selector: 'app-users-data',
+  templateUrl: './users-data.component.html',
+  styleUrls: ['./users-data.component.scss'],
 })
-export class AdminComponent implements OnInit {
+export class UsersDataComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private storeDashboard: Store<IDashboardState>
