@@ -6,5 +6,3 @@ export const USER_TABLE_DATA_ARRAY = [
   'image_url',
   'graph',
 ];
-
-export const CHART_DATA_ARRAY = ['agreeableness', 'drive', 'luck', 'openess'];

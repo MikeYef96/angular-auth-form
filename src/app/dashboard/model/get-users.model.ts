@@ -1,35 +1,27 @@
-export interface IUser {
+export interface IUserData {
   first_name: string;
   last_name: string;
   email: string;
   groups: string[];
 }
 
-export interface IUserAssessment {
+export interface IReportsGraph {
   id: number;
-  data: IAssessmentGraphData[];
+  data: IGraphData;
   type: string;
 }
 
-export interface IAssessmentGraphData {
+export interface IGraphData {
   agreeableness: number;
   drive: number;
   luck: number;
   openess: number;
 }
 
-export interface IAssessmentData {
+export interface IUserReports {
   id: number;
   name: string;
   users_resolved: number;
   active: boolean;
   image_url: string;
-}
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-  description: string;
 }

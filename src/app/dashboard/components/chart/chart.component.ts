@@ -1,24 +1,57 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Chart } from 'chart.js';
+import { take } from 'rxjs/operators';
 
-import {
-  CHART_DATA_VALUES_ARRAY,
-  CHART_DATA_KEYS_ARRAY,
-} from '../../constants/chart_data';
-import {
-  IUserAssessment,
-  IAssessmentGraphData,
-} from '../../model/get-users.model';
+import { IReportsGraph } from '../../model/get-users.model';
+import { IDashboardState } from '../../store/dashboard.reducer';
+import { getGraphRequest } from '../../store/dashboard.actions';
+import { selectAllAssessmentsGraph } from '../../store/dashboard.selectors';
+import { graphConfig } from 'src/app/shared/functions/chart-config.function';
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
 })
-export class ChartComponent implements OnInit {
-  @Input() itemId = null;
+export class ChartComponent implements OnInit, AfterViewInit {
+  @Input() userId = null;
 
-  constructor() {}
+  canvas: any;
+  ctx: any;
 
-  ngOnInit(): void {}
+  @ViewChild('mychart') mychart: ElementRef | undefined;
+
+  constructor(public storeDashboard: Store<IDashboardState>) {}
+
+  ngOnInit(): void {
+    this.storeDashboard.dispatch(getGraphRequest({ userId: this.userId }));
+  }
+
+  ngAfterViewInit(): void {
+    if (this.mychart) {
+      this.canvas = this.mychart.nativeElement;
+    }
+    this.ctx = this.canvas.getContext('2d');
+
+    this.storeDashboard
+      .select(selectAllAssessmentsGraph)
+      .pipe(take(1))
+      .subscribe((data: IReportsGraph) => {
+        let myChart = new Chart(
+          this.ctx,
+          graphConfig(Object.values(data.data), Object.keys(data.data))
+        );
+        console.log(
+          graphConfig(Object.values(data.data), Object.keys(data.data))
+        );
+      });
+  }
 }

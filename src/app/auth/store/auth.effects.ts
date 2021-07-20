@@ -1,4 +1,3 @@
-import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';

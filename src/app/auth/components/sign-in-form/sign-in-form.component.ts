@@ -1,11 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+
 import { AuthStateInterface } from 'src/app/auth/model/state.model';
 import { signInRequest } from '../../store/auth.actions';
 
@@ -15,7 +11,7 @@ import { signInRequest } from '../../store/auth.actions';
   styleUrls: ['./sign-in-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignInFormComponent implements OnInit {
+export class SignInFormComponent {
   constructor(private store: Store<AuthStateInterface>) {}
 
   form: FormGroup = new FormGroup({
@@ -28,8 +24,6 @@ export class SignInFormComponent implements OnInit {
       Validators.required,
     ]),
   });
-
-  ngOnInit(): void {}
 
   signInHandler(): void {
     if (this.form.invalid) {

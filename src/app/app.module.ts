@@ -24,6 +24,7 @@ import { SharedModule } from './shared/shared.module';
 import { dashboardReducer } from './dashboard/store/dashboard.reducer';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardEffects } from './dashboard/store/dashboard.effects';
+import { ChartModule } from 'angular2-chartjs';
 
 @NgModule({
   declarations: [AppComponent],
@@ -51,6 +52,7 @@ import { DashboardEffects } from './dashboard/store/dashboard.effects';
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),
+    ChartModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
