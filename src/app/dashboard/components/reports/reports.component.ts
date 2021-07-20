@@ -10,7 +10,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { CHART_DATA_VALUES_ARRAY } from '../../constants/table-data.constant';
 import { USER_TABLE_DATA_ARRAY } from '../../constants/user.constant';
 import { IDashboardState } from '../../model/dashboard-state.model';
 import { IUserReports, IReportsGraph } from '../../model/get-users.model';

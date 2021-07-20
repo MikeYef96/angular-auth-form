@@ -22,6 +22,16 @@ export class AuthService extends ApiService {
     });
   }
 
+  logout(): void {
+    if (this.hasToken()) {
+      this.setToken('');
+    }
+
+    if (this.hasRole()) {
+      this.setRole('');
+    }
+  }
+
   setToken(token: string): void {
     localStorage.setItem(this.tokenStoreKey, token);
   }
