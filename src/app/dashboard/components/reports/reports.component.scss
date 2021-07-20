@@ -10,11 +10,22 @@
   width: calc(100vw - 30px);
 }
 
-.title {
+.header-title {
   height: 30px;
   padding-left: 30px;
   padding-right: 30px;
   color: #ffffff;
+}
+
+.header-nav-button {
+  font-size: 15px;
+  font-weight: bold;
+  background: #8a7ef5;
+
+  &:hover {
+    color: #e7e7e7;
+    background: #6158af;
+  }
 }
 
 .table-wrapper {

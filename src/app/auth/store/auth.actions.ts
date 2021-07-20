@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+
 import { IUserData } from '../../shared/models/user-data.model';
 
 export const signInRequest = createAction(

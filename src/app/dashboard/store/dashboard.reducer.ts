@@ -6,14 +6,9 @@ import {
   IReportsGraph,
   IUserData,
 } from '../model/get-users.model';
+import { IDashboardState } from '../model/dashboard-state.model';
 
-export interface IDashboardState {
-  usersList: IUserData[];
-  assessmentsList: IUserReports[];
-  assessmentsGraph: IReportsGraph | null;
-}
-
-export const initialState: IDashboardState = {
+export const initState: IDashboardState = {
   usersList: [],
   assessmentsGraph: null,
   assessmentsList: [],
@@ -27,7 +22,7 @@ export function dashboardReducer(
 }
 
 const reducer = createReducer<IDashboardState>(
-  initialState,
+  initState,
 
   // Get Users List
 

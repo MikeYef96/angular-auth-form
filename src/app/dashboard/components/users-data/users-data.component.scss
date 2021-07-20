@@ -1,3 +1,33 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100px;
+  background: #3070a5;
+}
+
+.header-nav-button {
+  font-size: 15px;
+  font-weight: bold;
+  background: #8a7ef5;
+
+  &:hover {
+    color: #e7e7e7;
+    background: #6158af;
+  }
+}
+
+.header-container {
+  width: calc(100vw - 30px);
+}
+
+.header-title {
+  height: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  color: #ffffff;
+}
+
 .table-wrapper {
   display: flex;
   justify-content: center;

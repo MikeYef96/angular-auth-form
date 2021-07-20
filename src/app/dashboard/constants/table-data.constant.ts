@@ -1,4 +1,5 @@
 import { Observable, of } from 'rxjs';
+
 import { IReportsGraph } from '../model/get-users.model';
 
 export const CHART_DATA_VALUES_ARRAY: Observable<IReportsGraph[]> = of([

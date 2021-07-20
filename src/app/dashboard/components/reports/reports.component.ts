@@ -10,11 +10,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { CHART_DATA_VALUES_ARRAY } from '../../constants/chart-data-values';
-import { USER_TABLE_DATA_ARRAY } from '../../constants/user';
+import { CHART_DATA_VALUES_ARRAY } from '../../constants/table-data.constant';
+import { USER_TABLE_DATA_ARRAY } from '../../constants/user.constant';
+import { IDashboardState } from '../../model/dashboard-state.model';
 import { IUserReports, IReportsGraph } from '../../model/get-users.model';
 import { getAssessmentsRequest } from '../../store/dashboard.actions';
-import { IDashboardState } from '../../store/dashboard.reducer';
 import { selectAllAssessments } from '../../store/dashboard.selectors';
 
 @Component({
@@ -33,31 +33,18 @@ import { selectAllAssessments } from '../../store/dashboard.selectors';
   ],
 })
 export class ReportsComponent {
-  constructor(
-    public authService: AuthService,
-    public storeDashboard: Store<IDashboardState>
-  ) {
-    this.storeDashboard.dispatch(getAssessmentsRequest());
-  }
-
-  chartDataValues: Observable<IReportsGraph[]> = CHART_DATA_VALUES_ARRAY;
-
   expandedElement: IUserReports | undefined;
-  dataSource = this.chartDataValues;
-  columnsToDisplay = USER_TABLE_DATA_ARRAY;
 
-  id = CHART_DATA_VALUES_ARRAY;
-
-  clickBtn: boolean = false;
-
-  displayedAssessmentColumns: string[] = USER_TABLE_DATA_ARRAY;
+  columnsToDisplay: string[] = USER_TABLE_DATA_ARRAY;
 
   dataAssessmentSource: Observable<IUserReports[]> = this.storeDashboard.select(
     selectAllAssessments
   );
 
-  getAll(): void {
-    console.log(this.clickBtn);
-    this.clickBtn = !this.clickBtn;
+  constructor(
+    public authService: AuthService,
+    public storeDashboard: Store<IDashboardState>
+  ) {
+    this.storeDashboard.dispatch(getAssessmentsRequest());
   }
 }

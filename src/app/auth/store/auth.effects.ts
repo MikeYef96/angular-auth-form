@@ -2,7 +2,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as authActions from './auth.actions';
@@ -14,8 +14,7 @@ export class AuthEffects {
     private actions$: Actions,
     private authService: AuthService,
     private toastr: ToastrService,
-    private router: Router,
-    private ngZone: NgZone
+    private router: Router
   ) {}
 
   signIn$ = createEffect(() =>
@@ -24,12 +23,10 @@ export class AuthEffects {
       switchMap(({ email, password }) => {
         return this.authService.login({ email, password }).pipe(
           map((userSession) => {
-            this.ngZone.run(() => {
-              this.authService.setToken(userSession.token);
-              this.authService.setRole(userSession.role);
+            this.authService.setToken(userSession.token);
+            this.authService.setRole(userSession.role);
 
-              this.router.navigate(['/dashboard/reports']);
-            });
+            this.router.navigate(['/dashboard/reports']);
 
             return authActions.signInSuccess(userSession);
           }),

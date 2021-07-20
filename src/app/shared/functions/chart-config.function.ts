@@ -1,11 +1,11 @@
-export function graphConfig(data: number[], labels: string[]) {
+export function graphConfig(data: number[], labels: string[], type: string) {
   return {
-    type: 'bar',
+    type,
     data: {
       labels,
       datasets: [
         {
-          label: '# of Votes',
+          label: 'Count',
           data,
           backgroundColor: [
             'rgba(255, 99, 132, 0.7)',

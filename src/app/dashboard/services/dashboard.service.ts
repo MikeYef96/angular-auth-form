@@ -9,7 +9,7 @@ import {
   IUserData,
 } from 'src/app/dashboard/model/get-users.model';
 import { ApiService } from '../../shared/services/api.service';
-import { CHART_DATA_VALUES_ARRAY } from '../constants/chart-data-values';
+import { CHART_DATA_VALUES_ARRAY } from '../constants/table-data.constant';
 
 @Injectable({
   providedIn: 'root',

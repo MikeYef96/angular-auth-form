@@ -1,7 +1,7 @@
 <div class="header">
-  <h2 class="title">Iteam</h2>
+  <h2 class="header-title">Iteam</h2>
   <div class="header-container" *ngIf="authService.getRole() === 'Admin'">
-    <a routerLink="/dashboard/users-data" mat-button class="auth-header__button"
+    <a class="header-nav-button" routerLink="/dashboard/users-data" mat-button
       >To Admin</a
     >
   </div>

@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 
 import * as dashboardActions from './dashboard.actions';
 import { DashboardService } from '../../dashboard/services/dashboard.service';
+import { IUserData } from '../model/get-users.model';
 
 @Injectable()
 export class DashboardEffects {
@@ -20,7 +21,9 @@ export class DashboardEffects {
       ofType(dashboardActions.getUsersRequest),
       switchMap(() => {
         return this.dashboardService.getUsers().pipe(
-          map((users) => dashboardActions.getUsersSuccess({ users })),
+          map((users: IUserData[]) =>
+            dashboardActions.getUsersSuccess({ users })
+          ),
           catchError((error) => {
             this.toastr.error('Oops, login failed');
             return of(dashboardActions.getUsersError());
@@ -51,8 +54,6 @@ export class DashboardEffects {
     this.actions$.pipe(
       ofType(dashboardActions.getGraphRequest),
       switchMap(({ userId }) => {
-        console.log(userId);
-
         return this.dashboardService.getAssessmentsGraph(userId).pipe(
           map((graph) => {
             return dashboardActions.getGraphSuccess({ graph });

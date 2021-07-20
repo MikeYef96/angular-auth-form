@@ -11,10 +11,10 @@ import { Chart } from 'chart.js';
 import { take } from 'rxjs/operators';
 
 import { IReportsGraph } from '../../model/get-users.model';
-import { IDashboardState } from '../../store/dashboard.reducer';
 import { getGraphRequest } from '../../store/dashboard.actions';
 import { selectAllAssessmentsGraph } from '../../store/dashboard.selectors';
 import { graphConfig } from 'src/app/shared/functions/chart-config.function';
+import { IDashboardState } from '../../model/dashboard-state.model';
 
 @Component({
   selector: 'app-chart',
@@ -45,12 +45,13 @@ export class ChartComponent implements OnInit, AfterViewInit {
       .select(selectAllAssessmentsGraph)
       .pipe(take(1))
       .subscribe((data: IReportsGraph) => {
-        let myChart = new Chart(
+        const myChart = new Chart(
           this.ctx,
-          graphConfig(Object.values(data.data), Object.keys(data.data))
-        );
-        console.log(
-          graphConfig(Object.values(data.data), Object.keys(data.data))
+          graphConfig(
+            Object.values(data.data),
+            Object.keys(data.data),
+            data.type
+          )
         );
       });
   }

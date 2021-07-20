@@ -1,3 +1,12 @@
+<div class="header">
+  <h2 class="header-title">Iteam</h2>
+  <div class="header-container" *ngIf="authService.getRole() === 'Admin'">
+    <a class="header-nav-button" routerLink="/dashboard/reports" mat-button
+      >To Reports</a
+    >
+  </div>
+</div>
+
 <div class="table-wrapper">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="first_name">
