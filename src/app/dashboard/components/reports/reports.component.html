@@ -1,17 +1,19 @@
 <div class="header">
   <h2 class="header-title">Iteam</h2>
-  <div class="header-container" *ngIf="authService.getRole() === 'Admin'">
+  <div class="header-container" >
     <a class="header-nav-button" routerLink="/dashboard/users-data" mat-button
-      >To Admin</a
+       *ngIf="authService.getRole() === 'Admin'">To Admin</a
     >
   </div>
   <a
     class="header-nav-button logout"
     routerLink=""
     (click)="authService.clearLocalStorage()"
-    mat-button
-    >Log out</a
+    mat-button>
+      <span>Log out</span>
+  </a
   >
+
 </div>
 
 <div class="table-wrapper">
@@ -41,7 +43,7 @@
 
       <ng-container *ngIf="column === 'users_resolved'">
         <th mat-header-cell *matHeaderCellDef class="column-header">
-          {{ "User Resolved" }}
+          {{ "Users Resolved" }}
         </th>
         <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
       </ng-container>

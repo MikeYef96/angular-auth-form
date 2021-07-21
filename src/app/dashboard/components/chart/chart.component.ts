@@ -3,25 +3,21 @@ import {
   Component,
   ElementRef,
   Input,
-  OnInit,
   ViewChild,
 } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Chart } from 'chart.js';
 import { take } from 'rxjs/operators';
 
 import { IReportsGraph } from '../../model/get-users.model';
-import { getGraphRequest } from '../../store/dashboard.actions';
-import { selectAllAssessmentsGraph } from '../../store/dashboard.selectors';
 import { graphConfig } from 'src/app/shared/functions/chart-config.function';
-import { IDashboardState } from '../../model/dashboard-state.model';
+import {DashboardService} from "../../services/dashboard.service";
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
 })
-export class ChartComponent implements OnInit, AfterViewInit {
+export class ChartComponent implements AfterViewInit {
   @Input() userId = null;
 
   canvas: any;
@@ -29,11 +25,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
   @ViewChild('mychart') mychart: ElementRef | undefined;
 
-  constructor(public storeDashboard: Store<IDashboardState>) {}
-
-  ngOnInit(): void {
-    this.storeDashboard.dispatch(getGraphRequest({ userId: this.userId }));
-  }
+  constructor(public dashboardService: DashboardService) {}
 
   ngAfterViewInit(): void {
     if (this.mychart) {
@@ -41,18 +33,17 @@ export class ChartComponent implements OnInit, AfterViewInit {
     }
     this.ctx = this.canvas.getContext('2d');
 
-    this.storeDashboard
-      .select(selectAllAssessmentsGraph)
+    this.dashboardService.getAssessmentsGraph(this.userId)
       .pipe(take(1))
       .subscribe((data: IReportsGraph) => {
-        const myChart = new Chart(
-          this.ctx,
-          graphConfig(
-            Object.values(data.data),
-            Object.keys(data.data),
-            data.type
-          )
-        );
+          new Chart(
+               this.ctx,
+               graphConfig(
+                  Object.values(data.data),
+                  Object.keys(data.data),
+                  data.type
+               )
+          );
       });
   }
 }

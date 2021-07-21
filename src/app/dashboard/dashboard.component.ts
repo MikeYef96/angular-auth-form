@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
 
-import { IUserData } from '../shared/models/user-data.model';
 import { AuthService } from '../auth/services/auth.service';
-import { selectRole } from '../auth/store/auth.selectors';
-import { getAssessmentsRequest } from './store/dashboard.actions';
-import { selectAllAssessments } from './store/dashboard.selectors';
-import { IDashboardState } from './model/dashboard-state.model';
+import {DashboardService} from "./services/dashboard.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -15,14 +10,8 @@ import { IDashboardState } from './model/dashboard-state.model';
 })
 export class DashboardComponent {
   constructor(
-    private store: Store<IUserData>,
-    public authService: AuthService,
-    private storeDashboard: Store<IDashboardState>
+    private dashboardService: DashboardService
   ) {
-    this.storeDashboard.dispatch(getAssessmentsRequest());
+    this.dashboardService.getAssessments()
   }
-
-  role$ = this.store.select(selectRole);
-
-  dataSource = this.storeDashboard.select(selectAllAssessments);
 }

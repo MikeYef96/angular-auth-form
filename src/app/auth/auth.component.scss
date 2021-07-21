@@ -1,7 +1,9 @@
+@import "src/app/app.component";
+
 @media screen and (min-width: 320px) {
   .header {
     height: 60px;
-    background-color: #501594;
+    background-color: $header-bg;
   }
 
   .container {
@@ -19,12 +21,12 @@
     width: 100px;
     margin-right: 10px;
     text-align: center;
-    background-color: #2777ee;
+    background-color: $btn-bg;
     font-weight: bold;
     color: #fff;
 
     &:hover {
-      background-color: #205fbe;
+      background-color: $btn-hover-bg;
     }
   }
 }

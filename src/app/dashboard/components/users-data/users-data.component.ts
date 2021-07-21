@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { USERS_DATA_TABLE_ADMIN_ARRAY } from '../../constants/user-data-list.constant';
-import { IDashboardState } from '../../model/dashboard-state.model';
-import { getUsersRequest } from '../../store/dashboard.actions';
-import { selectAllUsers } from '../../store/dashboard.selectors';
+import {DashboardService} from "../../services/dashboard.service";
+import {IUserData} from "../../model/get-users.model";
 
 @Component({
   selector: 'app-users-data',
@@ -14,12 +14,13 @@ import { selectAllUsers } from '../../store/dashboard.selectors';
 })
 export class UsersDataComponent {
   displayedColumns: string[] = USERS_DATA_TABLE_ADMIN_ARRAY;
-  dataSource = this.storeDashboard.select(selectAllUsers);
+
+  dataSource: Observable<IUserData[]> =
+    this.dashboardService.getUsers()
+      .pipe(map((users: IUserData[]) => users))
 
   constructor(
     public authService: AuthService,
-    private storeDashboard: Store<IDashboardState>
-  ) {
-    this.storeDashboard.dispatch(getUsersRequest());
-  }
+    private dashboardService: DashboardService
+  ) {}
 }

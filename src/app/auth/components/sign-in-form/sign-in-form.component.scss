@@ -1,3 +1,5 @@
+@import "src/app/app.component";
+
 .form {
   display: flex;
   align-items: center;
@@ -6,12 +8,12 @@
   margin: 20px;
 }
 
-.form__title {
+.form-title {
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.form__input {
+.form-input {
   height: 30px;
   line-height: 10px;
   border: solid 1px #777777;
@@ -19,6 +21,13 @@
   margin-bottom: 15px;
 }
 
-.form__submit {
+.form-submit {
   display: block;
+  color: #fff;
+  background: $btn-bg;
+  font-weight: bold;
+
+  &:hover {
+    background: $btn-hover-bg;
+  }
 }
