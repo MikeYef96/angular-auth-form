@@ -16,6 +16,12 @@
   >
 </div>
 
+<div class="csv-btn-wrapper">
+  <button mat-button class="header-nav-button" type="button" (click)="onDownload()">
+    Download CSV
+  </button>
+</div>
+
 <div class="table-wrapper">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="first_name">

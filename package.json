@@ -25,6 +25,7 @@
     "@ngrx/store-devtools": "^12.2.0",
     "angular2-chartjs": "^0.5.1",
     "cors": "^2.8.5",
+    "ngx-csv": "^0.3.2",
     "ngx-toastr": "^14.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
