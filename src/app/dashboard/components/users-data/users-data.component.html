@@ -10,14 +10,19 @@
     class="header-nav-button logout"
     routerLink=""
     (click)="authService.clearLocalStorage()"
-    mat-button>
-    <span>Log out</span>
-  </a
+    mat-button
   >
+    <span>Log out</span>
+  </a>
 </div>
 
 <div class="csv-btn-wrapper">
-  <button mat-button class="header-nav-button" type="button" (click)="onDownload()">
+  <button
+    mat-button
+    class="header-nav-button"
+    type="button"
+    (click)="onDownload()"
+  >
     Download CSV
   </button>
 </div>

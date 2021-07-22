@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from '../auth/services/auth.service';
 import {DashboardService} from "./services/dashboard.service";
 
 @Component({

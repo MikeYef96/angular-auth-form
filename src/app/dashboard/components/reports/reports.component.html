@@ -1,19 +1,22 @@
 <div class="header">
   <h2 class="header-title">Iteam</h2>
-  <div class="header-container" >
-    <a class="header-nav-button" routerLink="/dashboard/users-data" mat-button
-       *ngIf="authService.getRole() === 'Admin'">To Admin</a
+  <div class="header-container">
+    <a
+      class="header-nav-button"
+      routerLink="/dashboard/users-data"
+      mat-button
+      *ngIf="authService.getRole() === 'Admin'"
+      >To Admin</a
     >
   </div>
   <a
     class="header-nav-button logout"
     routerLink=""
     (click)="authService.clearLocalStorage()"
-    mat-button>
-      <span>Log out</span>
-  </a
+    mat-button
   >
-
+    <span>Log out</span>
+  </a>
 </div>
 
 <div class="table-wrapper">

@@ -5,11 +5,11 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import {map} from "rxjs/operators";
+import { map } from 'rxjs/operators';
 
-import {DashboardService} from "../../services/dashboard.service";
+import { DashboardService } from '../../services/dashboard.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { USER_TABLE_DATA_ARRAY } from '../../constants/user.constant';
 import { IUserReports } from '../../model/get-users.model';
@@ -29,13 +29,13 @@ import { IUserReports } from '../../model/get-users.model';
     ]),
   ],
 })
-export class ReportsComponent{
+export class ReportsComponent {
   expandedElement: IUserReports | undefined;
   columnsToDisplay: string[] = USER_TABLE_DATA_ARRAY;
 
-  dataAssessmentSource: Observable<IUserReports[]> =
-    this.dashboardService.getAssessments()
-      .pipe(map((assessments: IUserReports[]) => assessments))
+  dataAssessmentSource: Observable<IUserReports[]> = this.dashboardService
+    .getAssessments()
+    .pipe(map((assessments: IUserReports[]) => assessments));
 
   constructor(
     public authService: AuthService,
