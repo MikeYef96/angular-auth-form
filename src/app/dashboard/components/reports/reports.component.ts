@@ -6,8 +6,7 @@ import {
   animate,
 } from '@angular/animations';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 import { DashboardService } from '../../services/dashboard.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -30,15 +29,21 @@ import { IUserReports } from '../../model/get-users.model';
   ],
 })
 export class ReportsComponent {
+  reportsDataSource: IUserReports[] = [];
+
   expandedElement: IUserReports | undefined;
   columnsToDisplay: string[] = USER_TABLE_DATA_ARRAY;
 
-  dataAssessmentSource: Observable<IUserReports[]> = this.dashboardService
-    .getAssessments()
-    .pipe(map((assessments: IUserReports[]) => assessments));
+  // reportsDataSource: Observable<IUserReports[]> = this.dashboardService
+  //   .getReports()
+  //   .pipe(map((assessments: IUserReports[]) => assessments));
 
   constructor(
     public authService: AuthService,
     private dashboardService: DashboardService
-  ) {}
+  ) {
+    this.dashboardService.reportsData$
+      .pipe(take(1))
+      .subscribe(value => this.reportsDataSource = value)
+  }
 }

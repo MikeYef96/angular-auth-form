@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ngxCsv } from 'ngx-csv';
 
@@ -14,7 +14,7 @@ import { IUserData } from '../../model/get-users.model';
   styleUrls: ['./users-data.component.scss'],
 })
 export class UsersDataComponent implements OnDestroy {
-  dataSource$: Observable<IUserData[]> = this.dashboardService.data$;
+  userDataSource: IUserData[] = [];
   subscription: Subject<IUserData[]> = new Subject();
 
   displayedColumns: string[] = USERS_DATA_TABLE_ADMIN_ARRAY;
@@ -23,13 +23,18 @@ export class UsersDataComponent implements OnDestroy {
     public authService: AuthService,
     private dashboardService: DashboardService,
   ) {
-    this.dataSource$
+    // this.dashboardService.getUsers()
+    //   .pipe(takeUntil(this.subscription))
+    //   .subscribe()
+
+    this.dashboardService.userData$
       .pipe(takeUntil(this.subscription))
-      .subscribe()
+      .subscribe(value => this.userDataSource = value)
+
   }
 
   onDownload() {
-    this.dashboardService.data$
+    this.dashboardService.userData$
       .pipe(takeUntil(this.subscription))
       .subscribe(
         (users: IUserData[]) => new ngxCsv(users, 'My Report'));

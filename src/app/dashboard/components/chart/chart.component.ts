@@ -34,7 +34,7 @@ export class ChartComponent implements AfterViewInit {
     this.ctx = this.canvas.getContext('2d');
 
     this.dashboardService
-      .getAssessmentsGraph(this.userId)
+      .getGraph(this.userId)
       .pipe(take(1))
       .subscribe((data: IReportsGraph) => {
         new Chart(

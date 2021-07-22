@@ -11,6 +11,6 @@ export class DashboardComponent {
   constructor(
     private dashboardService: DashboardService
   ) {
-    this.dashboardService.getAssessments()
+    this.dashboardService.getReports()
   }
 }

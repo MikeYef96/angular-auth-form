@@ -15,6 +15,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ChartComponent } from './components/chart/chart.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { UsersDataComponent } from './components/users-data/users-data.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { UsersDataComponent } from './components/users-data/users-data.component
     BrowserAnimationsModule,
     CommonModule,
     DashboardRoutingModule,
+    HttpClientModule,
     MatCardModule,
     MatToolbarModule,
     MatButtonModule,
