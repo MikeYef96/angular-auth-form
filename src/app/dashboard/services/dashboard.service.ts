@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, Injector } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Injectable, Injector} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 import {
   IUserReports,
@@ -14,13 +13,26 @@ import { CHART_DATA_VALUES_ARRAY } from '../constants/table-data.constant';
 @Injectable({
   providedIn: 'root',
 })
-export class DashboardService extends ApiService {
-  constructor(protected injector: Injector, private http: HttpClient) {
+export class DashboardService extends ApiService{
+  readonly dataSubject = new BehaviorSubject<IUserData[]>([]);
+  data$ = this.dataSubject.asObservable();
+
+  constructor(protected injector: Injector) {
     super(injector);
+
+    this.setUsers()
+      .subscribe(
+        (newValue:IUserData[]) => this.dataSubject.next(newValue))
   }
 
   getUsers(): Observable<IUserData[]> {
     return super.get<IUserData[]>('users');
+  }
+
+  setUsers(): Observable<IUserData[]> {
+   return  this.getUsers()
+      .pipe(
+        map((users: IUserData[]) => users));
   }
 
   getAssessments(): Observable<IUserReports[]> {
