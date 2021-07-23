@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { AuthService } from '../../auth/services/auth.service';
+import { AuthApiService } from '../../auth/services/auth-api.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthApiService, private router: Router) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler

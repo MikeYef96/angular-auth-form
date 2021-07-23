@@ -7,7 +7,7 @@ import { ApiService } from '../../shared/services/api.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService extends ApiService {
+export class AuthApiService extends ApiService {
   private tokenStoreKey = 'token';
   private roleStoreKey = 'role';
 
@@ -23,6 +23,7 @@ export class AuthService extends ApiService {
   }
 
   clearLocalStorage(): void {
+    window.location.reload();
     localStorage.clear();
   }
 

@@ -1,46 +1,49 @@
-import { Component, OnDestroy } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {take, takeUntil} from 'rxjs/operators';
 import { ngxCsv } from 'ngx-csv';
 
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { AuthApiService } from 'src/app/auth/services/auth-api.service';
 import { USERS_DATA_TABLE_ADMIN_ARRAY } from '../../constants/user-data-list.constant';
-import { DashboardService } from '../../services/dashboard.service';
 import { IUserData } from '../../model/get-users.model';
+import {DashboardStateService} from "../../services/dashboard-state.service";
 
 @Component({
   selector: 'app-users-data',
   templateUrl: './users-data.component.html',
   styleUrls: ['./users-data.component.scss'],
 })
-export class UsersDataComponent implements OnDestroy {
+export class UsersDataComponent implements OnInit, OnDestroy {
   userDataSource: IUserData[] = [];
-  subscription: Subject<IUserData[]> = new Subject();
+  subscription$: Subject<IUserData[]> = new Subject();
 
   displayedColumns: string[] = USERS_DATA_TABLE_ADMIN_ARRAY;
 
   constructor(
-    public authService: AuthService,
-    private dashboardService: DashboardService,
+    public authService: AuthApiService,
+    private dashboardStateService: DashboardStateService,
   ) {
-    // this.dashboardService.getUsers()
-    //   .pipe(takeUntil(this.subscription))
-    //   .subscribe()
+    // this.dashboardStateService.userData$
+    //   .pipe(take(1))
+    //   .subscribe(() => this.dashboardApiService.getUsers()
+    //     .subscribe((value: IUserData[]) =>
+    //       this.dashboardStateService.setUsers(value)))
+  }
 
-    this.dashboardService.userData$
-      .pipe(takeUntil(this.subscription))
+  ngOnInit(): void {
+    this.dashboardStateService.userData$
+      .pipe(takeUntil(this.subscription$))
       .subscribe(value => this.userDataSource = value)
-
   }
 
   onDownload() {
-    this.dashboardService.userData$
-      .pipe(takeUntil(this.subscription))
+    this.dashboardStateService.userData$
+      .pipe(take(1))
       .subscribe(
         (users: IUserData[]) => new ngxCsv(users, 'My Report'));
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscription$.unsubscribe();
   }
 }

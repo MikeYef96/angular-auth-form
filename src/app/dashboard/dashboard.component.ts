@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import {DashboardService} from "./services/dashboard.service";
+import {DashboardStateService} from "./services/dashboard-state.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -9,8 +9,8 @@ import {DashboardService} from "./services/dashboard.service";
 })
 export class DashboardComponent {
   constructor(
-    private dashboardService: DashboardService
+    private dashboardStateService: DashboardStateService
   ) {
-    this.dashboardService.getReports()
+    this.dashboardStateService.reportsData$.subscribe()
   }
 }

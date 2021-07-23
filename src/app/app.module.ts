@@ -12,12 +12,14 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'angular2-chartjs';
 
-import { AuthService } from './auth/services/auth.service';
+import { AuthApiService } from './auth/services/auth-api.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import {DashboardApiService} from "./dashboard/services/dashboard-api.service";
+import {DashboardStateService} from "./dashboard/services/dashboard-state.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +41,11 @@ import { DashboardModule } from './dashboard/dashboard.module';
     SharedModule,
     ChartModule,
   ],
-  providers: [AuthService],
+  providers: [
+    AuthApiService,
+    DashboardApiService,
+    DashboardStateService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

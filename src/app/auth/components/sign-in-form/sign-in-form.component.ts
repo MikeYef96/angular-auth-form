@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IAuthState } from 'src/app/auth/model/auth-state.model';
-import { AuthService } from '../../services/auth.service';
+import { AuthApiService } from '../../services/auth-api.service';
 import { IUserData } from '../../../shared/models/user-data.model';
 import { Router } from '@angular/router';
 
@@ -17,7 +17,7 @@ export class SignInFormComponent implements OnInit {
     userData: null,
   };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthApiService, private router: Router) {}
 
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),

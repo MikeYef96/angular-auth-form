@@ -5,13 +5,14 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import { Component } from '@angular/core';
-import { take } from 'rxjs/operators';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import { takeUntil} from 'rxjs/operators';
 
-import { DashboardService } from '../../services/dashboard.service';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { AuthApiService } from 'src/app/auth/services/auth-api.service';
 import { USER_TABLE_DATA_ARRAY } from '../../constants/user.constant';
-import { IUserReports } from '../../model/get-users.model';
+import { IUserReports} from '../../model/get-users.model';
+import {Subject} from "rxjs";
+import {DashboardStateService} from "../../services/dashboard-state.service";
 
 @Component({
   selector: 'app-reports',
@@ -28,22 +29,32 @@ import { IUserReports } from '../../model/get-users.model';
     ]),
   ],
 })
-export class ReportsComponent {
+export class ReportsComponent implements OnInit, OnDestroy {
   reportsDataSource: IUserReports[] = [];
+  subscription: Subject<IUserReports[]> = new Subject();
 
   expandedElement: IUserReports | undefined;
   columnsToDisplay: string[] = USER_TABLE_DATA_ARRAY;
 
-  // reportsDataSource: Observable<IUserReports[]> = this.dashboardService
-  //   .getReports()
-  //   .pipe(map((assessments: IUserReports[]) => assessments));
-
   constructor(
-    public authService: AuthService,
-    private dashboardService: DashboardService
+    public authService: AuthApiService,
+    private dashboardStateService: DashboardStateService,
   ) {
-    this.dashboardService.reportsData$
-      .pipe(take(1))
+    // this.dashboardStateService.reportsData$
+    //   .pipe(take(1))
+    //   .subscribe(() =>
+    //     this.dashboardApiService.getReports()
+    //       .subscribe(value =>
+    //         this.dashboardStateService.setReports(value)))
+  }
+
+  ngOnInit(): void {
+    this.dashboardStateService.reportsData$
+      .pipe(takeUntil(this.subscription))
       .subscribe(value => this.reportsDataSource = value)
+    }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
   }
 }
