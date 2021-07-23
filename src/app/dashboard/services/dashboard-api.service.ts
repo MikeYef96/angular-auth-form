@@ -1,6 +1,6 @@
-import {Injectable, Injector} from '@angular/core';
-import { Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Injectable, Injector } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import {
   IUserReports,
@@ -13,7 +13,7 @@ import { CHART_DATA_VALUES_ARRAY } from '../constants/table-data.constant';
 @Injectable({
   providedIn: 'root',
 })
-export class DashboardApiService extends ApiService{
+export class DashboardApiService extends ApiService {
   constructor(protected injector: Injector) {
     super(injector);
   }
@@ -29,8 +29,7 @@ export class DashboardApiService extends ApiService{
   getGraph(id: number | null): Observable<IReportsGraph> {
     return CHART_DATA_VALUES_ARRAY.pipe(
       map((graphData: IReportsGraph[]) =>
-        graphData.find((item: IReportsGraph) =>
-          Boolean(item.id === id))
+        graphData.find((item: IReportsGraph) => Boolean(item.id === id))
       )
     ) as Observable<IReportsGraph>;
   }

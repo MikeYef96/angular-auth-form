@@ -2,17 +2,19 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input, OnDestroy, OnInit,
+  Input,
+  OnDestroy,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { Chart } from 'chart.js';
-import {take, takeUntil} from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 
 import { IReportsGraph, IUserData } from '../../model/get-users.model';
 import { graphConfig } from 'src/app/shared/functions/chart-config.function';
 import { DashboardApiService } from '../../services/dashboard-api.service';
-import {Subject} from "rxjs";
-import {DashboardStateService} from "../../services/dashboard-state.service";
+import { Subject } from 'rxjs';
+import { DashboardStateService } from '../../services/dashboard-state.service';
 
 @Component({
   selector: 'app-chart',
@@ -29,8 +31,9 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('mychart') mychart: ElementRef | undefined;
 
-  constructor(public dashboardStateService: DashboardStateService,
-              private dashboardApiService: DashboardApiService
+  constructor(
+    public dashboardStateService: DashboardStateService,
+    private dashboardApiService: DashboardApiService
   ) {
     // this.dashboardStateService.graphData$
     //   .pipe(take(1))
@@ -42,7 +45,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.dashboardStateService.graphData$
       .pipe(takeUntil(this.subscription$))
-      .subscribe(value => this.graphDataSource = value)
+      .subscribe((value) => (this.graphDataSource = value));
   }
 
   ngAfterViewInit(): void {
@@ -51,28 +54,26 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.ctx = this.canvas.getContext('2d');
 
-    this.dashboardStateService.graphData$
-      .pipe(take(1))
-      .subscribe(() => {
-        this.dashboardApiService
-          .getGraph(this.userId)
-          .pipe(take(1))
-          .subscribe((data: IReportsGraph) => {
-            this.graphDataSource = data;
+    this.dashboardStateService.graphData$.pipe(take(1)).subscribe(() => {
+      this.dashboardApiService
+        .getGraph(this.userId)
+        .pipe(take(1))
+        .subscribe((data: IReportsGraph) => {
+          this.graphDataSource = data;
 
-            new Chart(
-              this.ctx,
-              graphConfig(
-                Object.values(data.data),
-                Object.keys(data.data),
-                data.type
-              )
-            );
-          });
-      })
+          new Chart(
+            this.ctx,
+            graphConfig(
+              Object.values(data.data),
+              Object.keys(data.data),
+              data.type
+            )
+          );
+        });
+    });
   }
 
   ngOnDestroy(): void {
-    this.subscription$.unsubscribe()
+    this.subscription$.unsubscribe();
   }
 }

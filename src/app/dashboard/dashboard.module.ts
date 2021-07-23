@@ -8,14 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ChartComponent } from './components/chart/chart.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { UsersDataComponent } from './components/users-data/users-data.component';
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [

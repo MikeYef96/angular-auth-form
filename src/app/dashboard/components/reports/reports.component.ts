@@ -5,14 +5,14 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import { takeUntil} from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
 
 import { AuthApiService } from 'src/app/auth/services/auth-api.service';
 import { USER_TABLE_DATA_ARRAY } from '../../constants/user.constant';
-import { IUserReports} from '../../model/get-users.model';
-import {Subject} from "rxjs";
-import {DashboardStateService} from "../../services/dashboard-state.service";
+import { IUserReports } from '../../model/get-users.model';
+import { Subject } from 'rxjs';
+import { DashboardStateService } from '../../services/dashboard-state.service';
 
 @Component({
   selector: 'app-reports',
@@ -38,7 +38,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   constructor(
     public authService: AuthApiService,
-    private dashboardStateService: DashboardStateService,
+    private dashboardStateService: DashboardStateService
   ) {
     // this.dashboardStateService.reportsData$
     //   .pipe(take(1))
@@ -51,10 +51,10 @@ export class ReportsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dashboardStateService.reportsData$
       .pipe(takeUntil(this.subscription))
-      .subscribe(value => this.reportsDataSource = value)
-    }
+      .subscribe((value) => (this.reportsDataSource = value));
+  }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe()
+    this.subscription.unsubscribe();
   }
 }
