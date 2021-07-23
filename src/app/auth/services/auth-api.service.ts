@@ -23,7 +23,6 @@ export class AuthApiService extends ApiService {
   }
 
   clearLocalStorage(): void {
-    window.location.reload();
     localStorage.clear();
   }
 
