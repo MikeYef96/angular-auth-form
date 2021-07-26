@@ -3,11 +3,12 @@ import {
   Component,
   ElementRef,
   Input,
+  OnChanges,
   OnDestroy,
   ViewChild,
 } from '@angular/core';
 import { Chart } from 'chart.js';
-import { takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 import { IReportsGraph, IUserData } from '../../model/get-users.model';
 import { graphConfig } from 'src/app/shared/functions/chart-config.function';
@@ -19,8 +20,8 @@ import { DashboardStateService } from '../../services/dashboard-state.service';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
 })
-export class ChartComponent implements AfterViewInit, OnDestroy {
-  @Input() userId: number = 1;
+export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
+  @Input() userId: number = 0;
 
   canvas: any;
   ctx: any;
@@ -33,7 +34,9 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     public dashboardStateService: DashboardStateService,
-  ) {
+  ) { }
+
+  ngOnChanges(): void {
     this.dashboardStateService.setGraphData(this.userId)
   }
 
@@ -45,12 +48,11 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
     this.ctx = this.canvas.getContext('2d');
 
     this.dashboardStateService.graphData$
-      .pipe(takeUntil(this.subscription$))
+      .pipe(take(1))
       .subscribe((graphData: IReportsGraph | null) => {
        if(graphData) {
          this.graphDataSource = graphData;
 
-         this.dashboardStateService
          new Chart(
            this.ctx,
            graphConfig(

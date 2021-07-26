@@ -35,7 +35,7 @@ export class DashboardStateService {
       .subscribe(reports => this.reportsDataSubject.next(reports))
   }
 
-  setGraphData(userId: number): void {
+  setGraphData(userId: number | null): void {
     this.dashboardApiService.getGraphById(userId)
       .subscribe((graphData: IReportsGraph) => this.graphDataSubject.next(graphData))
   }

@@ -26,7 +26,7 @@ export class DashboardApiService extends ApiService {
     return super.get<IUserReports[]>('userassessments');
   }
 
-  getGraphById(id: number): Observable<IReportsGraph> {
+  getGraphById(id: number | null): Observable<IReportsGraph> {
     return CHART_DATA_VALUES_ARRAY.pipe(
       map((charts: IReportsGraph[]) =>
         charts.find((chart: IReportsGraph) =>
