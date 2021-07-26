@@ -7,10 +7,10 @@ import {
 } from '@angular/animations';
 import { Component } from '@angular/core';
 
-import { AuthApiService } from 'src/app/auth/services/auth-api.service';
 import { USER_TABLE_DATA_ARRAY } from '../../constants/user.constant';
 import { IUserReports } from '../../model/get-users.model';
 import { DashboardStateService } from '../../services/dashboard-state.service';
+import {LocalStorageService} from "../../../shared/services/local-storage.service";
 
 @Component({
   selector: 'app-reports',
@@ -28,12 +28,11 @@ import { DashboardStateService } from '../../services/dashboard-state.service';
   ],
 })
 export class ReportsComponent {
-
   expandedElement: IUserReports | undefined;
   columnsToDisplay: string[] = USER_TABLE_DATA_ARRAY;
 
   constructor(
-    public authService: AuthApiService,
+    public localStorageService: LocalStorageService,
     public dashboardStateService: DashboardStateService
   ) {
     this.dashboardStateService.setReports();

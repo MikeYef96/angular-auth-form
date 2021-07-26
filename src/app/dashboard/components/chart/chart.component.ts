@@ -32,12 +32,10 @@ export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   @ViewChild('mychart') mychart: ElementRef | undefined;
 
-  constructor(
-    public dashboardStateService: DashboardStateService,
-  ) { }
+  constructor(public dashboardStateService: DashboardStateService) {}
 
   ngOnChanges(): void {
-    this.dashboardStateService.setGraphData(this.userId)
+    this.dashboardStateService.setGraphData(this.userId);
   }
 
   ngAfterViewInit(): void {
@@ -50,20 +48,20 @@ export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.dashboardStateService.graphData$
       .pipe(take(1))
       .subscribe((graphData: IReportsGraph | null) => {
-       if(graphData) {
-         this.graphDataSource = graphData;
+        if (graphData) {
+          this.graphDataSource = graphData;
 
-         new Chart(
-           this.ctx,
-           graphConfig(
-             Object.values(graphData.data),
-             Object.keys(graphData.data),
-             graphData.type
-           )
-         )
-       }
+          new Chart(
+            this.ctx,
+            graphConfig(
+              Object.values(graphData.data),
+              Object.keys(graphData.data),
+              graphData.type
+            )
+          );
+        }
       });
-    }
+  }
 
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();

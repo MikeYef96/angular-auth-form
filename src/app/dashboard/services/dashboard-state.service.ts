@@ -20,23 +20,26 @@ export class DashboardStateService {
   reportsData$ = this.reportsDataSubject.asObservable();
   graphData$ = this.graphDataSubject.asObservable();
 
-  constructor(
-    private dashboardApiService: DashboardApiService
-  ) { }
+  constructor(private dashboardApiService: DashboardApiService) {}
 
   setUsers(): void {
-    this.dashboardApiService.getUsers()
+    this.dashboardApiService
+      .getUsers()
       .pipe()
-      .subscribe((users: IUserData[]) => this.userDataSubject.next(users))
+      .subscribe((users: IUserData[]) => this.userDataSubject.next(users));
   }
 
   setReports(): void {
-    this.dashboardApiService.getReports()
-      .subscribe(reports => this.reportsDataSubject.next(reports))
+    this.dashboardApiService
+      .getReports()
+      .subscribe((reports) => this.reportsDataSubject.next(reports));
   }
 
   setGraphData(userId: number | null): void {
-    this.dashboardApiService.getGraphById(userId)
-      .subscribe((graphData: IReportsGraph) => this.graphDataSubject.next(graphData))
+    this.dashboardApiService
+      .getGraphById(userId)
+      .subscribe((graphData: IReportsGraph) =>
+        this.graphDataSubject.next(graphData)
+      );
   }
 }

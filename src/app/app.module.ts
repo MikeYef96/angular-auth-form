@@ -18,8 +18,8 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import {DashboardApiService} from "./dashboard/services/dashboard-api.service";
-import {DashboardStateService} from "./dashboard/services/dashboard-state.service";
+import { DashboardApiService } from './dashboard/services/dashboard-api.service';
+import { DashboardStateService } from './dashboard/services/dashboard-state.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,11 +41,7 @@ import {DashboardStateService} from "./dashboard/services/dashboard-state.servic
     SharedModule,
     ChartModule,
   ],
-  providers: [
-    AuthApiService,
-    DashboardApiService,
-    DashboardStateService
-  ],
+  providers: [AuthApiService, DashboardApiService, DashboardStateService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

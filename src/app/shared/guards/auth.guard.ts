@@ -9,10 +9,11 @@ import {
 import { Observable } from 'rxjs';
 
 import { AuthApiService } from '../../auth/services/auth-api.service';
+import {LocalStorageService} from "../services/local-storage.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(public authService: AuthApiService, public router: Router) {}
+  constructor(public localStorageService: LocalStorageService, public router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -22,7 +23,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (!this.authService.hasToken() || !this.authService.hasRole()) {
+    if (!this.localStorageService.hasToken() || !this.localStorageService.hasRole()) {
       this.router.navigate(['auth/login']);
       return false;
     }
@@ -32,7 +33,7 @@ export class AuthGuard implements CanActivate {
   }
 
   checkUserRole(route: ActivatedRouteSnapshot, url: any): boolean {
-    const userRole = this.authService.getRole();
+    const userRole = this.localStorageService.getRole();
 
     if (route.data.role.indexOf(userRole) === -1) {
       this.router.navigate(['dashboard/reports']);

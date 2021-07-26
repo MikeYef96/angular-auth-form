@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { AuthApiService } from '../../auth/services/auth-api.service';
+import {LocalStorageService} from "../services/local-storage.service";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthApiService, private router: Router) {}
+  constructor(private localStorageService: LocalStorageService, private router: Router) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -32,7 +32,7 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err instanceof HttpErrorResponse && err.status === 401) {
-          this.authService.setToken('');
+          this.localStorageService.setToken('');
           this.router.navigate(['/auth/login']);
         }
         return throwError(err);

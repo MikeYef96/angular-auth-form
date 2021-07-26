@@ -5,6 +5,7 @@ import { IAuthState } from 'src/app/auth/model/auth-state.model';
 import { AuthApiService } from '../../services/auth-api.service';
 import { IUserData } from '../../../shared/models/user-data.model';
 import { Router } from '@angular/router';
+import {LocalStorageService} from "../../../shared/services/local-storage.service";
 
 @Component({
   selector: 'app-sign-in-form',
@@ -12,12 +13,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-in-form.component.scss'],
 })
 export class SignInFormComponent implements OnInit {
-  initState: IAuthState = {
-    isAuthorized: false,
-    userData: null,
-  };
 
-  constructor(private authService: AuthApiService, private router: Router) {}
+  constructor(private authService: AuthApiService,
+              private router: Router,
+              public localStorageService: LocalStorageService) {}
 
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
@@ -25,9 +24,9 @@ export class SignInFormComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    if (this.authService.getToken()) {
-      this.initState.isAuthorized = true;
-      this.authService.getRole();
+    if (this.localStorageService.getToken()) {
+      this.localStorageService.initState.isAuthorized = true;
+      this.localStorageService.getRole();
     }
   }
 
@@ -35,10 +34,10 @@ export class SignInFormComponent implements OnInit {
     this.authService
       .login(this.form.getRawValue())
       .subscribe((data: IUserData) => {
-        this.authService.setToken(data.token);
-        this.authService.setRole(data.role);
+        this.localStorageService.setToken(data.token);
+        this.localStorageService.setRole(data.role);
 
-        this.initState.isAuthorized = true;
+        this.localStorageService.initState.isAuthorized = true;
 
         this.router.navigate(['/dashboard/reports']);
       });

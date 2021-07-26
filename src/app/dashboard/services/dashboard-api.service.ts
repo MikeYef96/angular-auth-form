@@ -29,8 +29,7 @@ export class DashboardApiService extends ApiService {
   getGraphById(id: number | null): Observable<IReportsGraph> {
     return CHART_DATA_VALUES_ARRAY.pipe(
       map((charts: IReportsGraph[]) =>
-        charts.find((chart: IReportsGraph) =>
-          Boolean(chart.id === id))
+        charts.find((chart: IReportsGraph) => Boolean(chart.id === id))
       )
     ) as Observable<IReportsGraph>;
   }
