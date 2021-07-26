@@ -6,8 +6,8 @@ export const CHART_DATA_VALUES_ARRAY: Observable<IReportsGraph[]> = of([
   {
     id: 1,
     data: {
-      agreeableness: 13,
-      drive: 21,
+      agreeableness: 13.333333333333334,
+      drive: 21.66666668,
       luck: 10,
       openess: 30,
     },
@@ -17,8 +17,8 @@ export const CHART_DATA_VALUES_ARRAY: Observable<IReportsGraph[]> = of([
     id: 2,
     data: {
       agreeableness: 21,
-      drive: 36,
-      luck: 30,
+      drive: 14,
+      luck: 40,
       openess: 19,
     },
     type: 'bar',
