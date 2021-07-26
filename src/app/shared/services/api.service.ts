@@ -30,35 +30,4 @@ export class ApiService {
   ): Observable<T> {
     return this.httpClient.post<T>(`${this.apiUrl}/api/${path}`, body, options);
   }
-
-  patch<T>(
-    path: string,
-    body: any,
-    options: { [param: string]: any } = {}
-  ): Observable<T> {
-    return this.httpClient.patch<T>(
-      `${this.apiUrl}/api/${path}`,
-      body,
-      options
-    );
-  }
-
-  put<T>(
-    path: string,
-    body: any,
-    options: { [param: string]: any } = {}
-  ): Observable<T> {
-    return this.httpClient.patch<T>(
-      `${this.apiUrl}/api/${path}`,
-      body,
-      options
-    );
-  }
-
-  delete<T>(
-    path: string,
-    options: { [param: string]: any } = {}
-  ): Observable<T> {
-    return this.httpClient.patch<T>(`${this.apiUrl}/api/${path}`, options);
-  }
 }

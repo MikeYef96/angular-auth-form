@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import {IAuthState} from "../../auth/model/auth-state.model";
 
 @Injectable({

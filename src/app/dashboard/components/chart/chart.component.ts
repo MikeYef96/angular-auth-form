@@ -3,16 +3,16 @@ import {
   Component,
   ElementRef,
   Input,
-  OnChanges,
   OnDestroy,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { Chart } from 'chart.js';
 import { take } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { IReportsGraph, IUserData } from '../../model/get-users.model';
 import { graphConfig } from 'src/app/shared/functions/chart-config.function';
-import { Subject } from 'rxjs';
 import { DashboardStateService } from '../../services/dashboard-state.service';
 
 @Component({
@@ -20,7 +20,7 @@ import { DashboardStateService } from '../../services/dashboard-state.service';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
 })
-export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() userId: number = 0;
 
   canvas: any;
@@ -34,7 +34,7 @@ export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   constructor(public dashboardStateService: DashboardStateService) {}
 
-  ngOnChanges(): void {
+  ngOnInit(): void {
     this.dashboardStateService.setGraphData(this.userId);
   }
 

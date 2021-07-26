@@ -8,7 +8,6 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { AuthApiService } from '../../auth/services/auth-api.service';
 import {LocalStorageService} from "../services/local-storage.service";
 
 @Injectable()
@@ -28,11 +27,10 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
-    let url: string = state.url;
-    return this.checkUserRole(next, url);
+    return this.checkUserRole(next);
   }
 
-  checkUserRole(route: ActivatedRouteSnapshot, url: any): boolean {
+  checkUserRole(route: ActivatedRouteSnapshot): boolean {
     const userRole = this.localStorageService.getRole();
 
     if (route.data.role.indexOf(userRole) === -1) {
