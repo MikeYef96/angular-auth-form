@@ -1,6 +1,9 @@
 # AngularAuthForm
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2.
+   To login use this credentials
+   
+    email: admin@deepersignals.com, password: password
+    email: user@deepersignals.com,  password: password
 
 ## Development server
 
