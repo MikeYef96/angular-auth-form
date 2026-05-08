@@ -9,9 +9,10 @@ import { selectAllAssessments } from './store/dashboard.selectors';
 import { IDashboardState } from './model/dashboard-state.model';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class DashboardComponent {
   constructor(

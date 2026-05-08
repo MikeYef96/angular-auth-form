@@ -17,9 +17,10 @@ import { graphConfig } from 'src/app/shared/functions/chart-config.function';
 import { IDashboardState } from '../../model/dashboard-state.model';
 
 @Component({
-  selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss'],
+    selector: 'app-chart',
+    templateUrl: './chart.component.html',
+    styleUrls: ['./chart.component.scss'],
+    standalone: false
 })
 export class ChartComponent implements OnInit, AfterViewInit {
   @Input() userId = null;
@@ -45,14 +46,14 @@ export class ChartComponent implements OnInit, AfterViewInit {
       .select(selectAllAssessmentsGraph)
       .pipe(take(1))
       .subscribe((data: IReportsGraph) => {
-        const myChart = new Chart(
-          this.ctx,
-          graphConfig(
-            Object.values(data.data),
-            Object.keys(data.data),
-            data.type
-          )
-        );
+        // const myChart = new Chart(
+        //   this.ctx,
+        //   graphConfig(
+        //     Object.values(data.data),
+        //     Object.keys(data.data),
+        //     data.type
+        //   )
+        // );
       });
   }
 }

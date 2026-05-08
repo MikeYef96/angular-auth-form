@@ -8,9 +8,10 @@ import { getUsersRequest } from '../../store/dashboard.actions';
 import { selectAllUsers } from '../../store/dashboard.selectors';
 
 @Component({
-  selector: 'app-users-data',
-  templateUrl: './users-data.component.html',
-  styleUrls: ['./users-data.component.scss'],
+    selector: 'app-users-data',
+    templateUrl: './users-data.component.html',
+    styleUrls: ['./users-data.component.scss'],
+    standalone: false
 })
 export class UsersDataComponent {
   displayedColumns: string[] = USERS_DATA_TABLE_ADMIN_ARRAY;
