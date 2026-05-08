@@ -6,9 +6,10 @@ import { IAuthState } from 'src/app/auth/model/auth-state.model';
 import { signInRequest } from '../../store/auth.actions';
 
 @Component({
-  selector: 'app-sign-in-form',
-  templateUrl: './sign-in-form.component.html',
-  styleUrls: ['./sign-in-form.component.scss'],
+    selector: 'app-sign-in-form',
+    templateUrl: './sign-in-form.component.html',
+    styleUrls: ['./sign-in-form.component.scss'],
+    standalone: false
 })
 export class SignInFormComponent {
   constructor(private store: Store<IAuthState>) {}
