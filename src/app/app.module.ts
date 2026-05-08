@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -24,30 +23,34 @@ import { SharedModule } from './shared/shared.module';
 import { dashboardReducer } from './dashboard/store/dashboard.reducer';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardEffects } from './dashboard/store/dashboard.effects';
-import { ChartModule } from 'angular2-chartjs';
 
-@NgModule({ declarations: [AppComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        AuthModule,
-        DashboardModule,
-        CommonModule,
-        MatCardModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatInputModule,
-        MatIconModule,
-        MatExpansionModule,
-        MatTableModule,
-        SharedModule,
-        StoreModule.forRoot({
-            auth: authReducer,
-            dashboard: dashboardReducer,
-        }),
-        EffectsModule.forRoot([AuthEffects, DashboardEffects]),
-        StoreDevtoolsModule.instrument({
-            maxAge: 25,
-        }),
-        ChartModule], providers: [AuthService, provideHttpClient(withInterceptorsFromDi())] })
+@NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA ],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AuthModule,
+    DashboardModule,
+    CommonModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatInputModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatTableModule,
+    SharedModule,
+    StoreModule.forRoot({
+        auth: authReducer,
+        dashboard: dashboardReducer,
+    }),
+    EffectsModule.forRoot([AuthEffects, DashboardEffects]),
+    StoreDevtoolsModule.instrument({
+        maxAge: 25,
+    }),
+    ],
+  providers: [AuthService, provideHttpClient(withInterceptorsFromDi())]
+})
 export class AppModule {}

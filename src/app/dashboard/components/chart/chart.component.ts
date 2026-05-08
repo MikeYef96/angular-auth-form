@@ -46,14 +46,14 @@ export class ChartComponent implements OnInit, AfterViewInit {
       .select(selectAllAssessmentsGraph)
       .pipe(take(1))
       .subscribe((data: IReportsGraph) => {
-        const myChart = new Chart(
-          this.ctx,
-          graphConfig(
-            Object.values(data.data),
-            Object.keys(data.data),
-            data.type
-          )
-        );
+        // const myChart = new Chart(
+        //   this.ctx,
+        //   graphConfig(
+        //     Object.values(data.data),
+        //     Object.keys(data.data),
+        //     data.type
+        //   )
+        // );
       });
   }
 }

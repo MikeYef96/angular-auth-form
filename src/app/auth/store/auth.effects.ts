@@ -1,6 +1,5 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,7 +12,6 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private toastr: ToastrService,
     private router: Router
   ) {}
 
@@ -31,7 +29,7 @@ export class AuthEffects {
             return authActions.signInSuccess(userSession);
           }),
           catchError((error) => {
-            this.toastr.error('Oops, login failed');
+            // this.toastr.error('Oops, login failed');
             return of(authActions.signInError());
           })
         );
