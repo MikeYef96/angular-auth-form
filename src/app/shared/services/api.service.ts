@@ -12,7 +12,7 @@ export class ApiService {
   private httpClient: HttpClient;
 
   protected get apiUrl(): string {
-    return this.environment.dsApiUrl;
+    return this.environment.apiUrl;
   }
 
   constructor(protected injector: Injector) {

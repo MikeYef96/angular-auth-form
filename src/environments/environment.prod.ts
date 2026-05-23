@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  dsApiUrl: 'https://ds-test-api.herokuapp.com',
+  apiUrl: 'http://localhost:3333',
 };

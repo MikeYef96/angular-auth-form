@@ -1,7 +1,5 @@
 # Local Backend for angular-auth-form
 
-This backend replaces the remote `ds-test-api` endpoint during local development.
-
 ## Install
 
 ```bash
