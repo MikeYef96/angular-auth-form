@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  dsApiUrl: 'http://localhost:3333', // before it was 'https://ds-test-api.herokuapp.com' but this app N/A on heroku
+  dsApiUrl: 'http://localhost:3333',
 };
 
 /*
