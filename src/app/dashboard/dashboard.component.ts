@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 
 import { IUserData } from '../shared/models/user-data.model';
@@ -23,7 +24,7 @@ export class DashboardComponent {
     this.storeDashboard.dispatch(getAssessmentsRequest());
   }
 
-  role$ = this.store.select(selectRole);
+  role$ = toSignal(this.store.select(selectRole));
 
   dataSource = this.storeDashboard.select(selectAllAssessments);
 }

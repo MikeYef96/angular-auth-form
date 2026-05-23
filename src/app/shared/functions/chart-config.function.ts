@@ -1,4 +1,10 @@
-export function graphConfig(data: number[], labels: string[], type: string) {
+import type { ChartConfiguration, ChartType } from 'chart.js';
+
+export function graphConfig(
+  data: number[],
+  labels: string[],
+  type: ChartType
+): ChartConfiguration<ChartType> {
   return {
     type,
     data: {
@@ -25,13 +31,9 @@ export function graphConfig(data: number[], labels: string[], type: string) {
     },
     options: {
       scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true,
-            },
-          },
-        ],
+        y: {
+          beginAtZero: true,
+        },
       },
     },
   };

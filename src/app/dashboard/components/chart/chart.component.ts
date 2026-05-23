@@ -7,8 +7,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Chart } from 'chart.js';
-import { take } from 'rxjs/operators';
+import Chart from 'chart.js/auto';
+import { filter, take } from 'rxjs/operators';
 
 import { IReportsGraph } from '../../model/get-users.model';
 import { getGraphRequest } from '../../store/dashboard.actions';
@@ -42,18 +42,21 @@ export class ChartComponent implements OnInit, AfterViewInit {
     }
     this.ctx = this.canvas.getContext('2d');
 
+    if (!this.canvas || !this.ctx) {
+      return;
+    }
+
     this.storeDashboard
       .select(selectAllAssessmentsGraph)
-      .pipe(take(1))
+      .pipe(
+        filter((data): data is IReportsGraph => Boolean(data) && Boolean(data.data)),
+        take(1)
+      )
       .subscribe((data: IReportsGraph) => {
-        // const myChart = new Chart(
-        //   this.ctx,
-        //   graphConfig(
-        //     Object.values(data.data),
-        //     Object.keys(data.data),
-        //     data.type
-        //   )
-        // );
+        const chartData = Object.values(data.data) as number[];
+        const chartLabels = Object.keys(data.data);
+
+        new Chart(this.ctx, graphConfig(chartData, chartLabels, data.type));
       });
   }
 }
