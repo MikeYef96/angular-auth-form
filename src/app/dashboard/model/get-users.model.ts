@@ -1,3 +1,5 @@
+import type { ChartType } from 'chart.js';
+
 export interface IUserData {
   first_name: string;
   last_name: string;
@@ -8,7 +10,7 @@ export interface IUserData {
 export interface IReportsGraph {
   id: number;
   data: IGraphData;
-  type: string;
+  type: ChartType;
 }
 
 export interface IGraphData {

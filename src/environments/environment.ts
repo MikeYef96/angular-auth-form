@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  dsApiUrl: 'https://ds-test-api.herokuapp.com',
+  dsApiUrl: 'http://localhost:3333',
 };
 
 /*

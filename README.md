@@ -2,12 +2,14 @@
 
    To login use this credentials
    
-    email: admin@deepersignals.com, password: password
-    email: user@deepersignals.com,  password: password
+    email: admin@example.com, password: admin123
+    email: user@example.com,  password: user123
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/auth`. The app will automatically reload if you change any of the source files.
+Run `ng serve` or `npm start` for a frontend. Navigate to `http://localhost:4200/auth`. The app will automatically reload if you change any of the source files.
+
+Run `npm run backend:start` for a backend server. Navigate to `http://localhost:3333/`.
 
 ## Code scaffolding
 
